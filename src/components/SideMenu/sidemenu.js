@@ -4,7 +4,7 @@ import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } fr
 import { FolderShared, Home, Logout } from '@mui/icons-material';
 import { ThemeProvider } from '@mui/material/styles';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { theme } from '../../App';
+import { APP_URL, theme } from '../../App';
 
 export function SideMenu({open, onClose, isHome}) {
 	const location = useLocation();
@@ -15,7 +15,7 @@ export function SideMenu({open, onClose, isHome}) {
 	const pageSelector = isHome ? '/saved' : '/home';
 
 	const logout = async () => {
-		await Axios.post('http://localhost:3001/logout', {
+		await Axios.post(APP_URL + '/logout', {
 			userID: location.state.user.id,
 			token: localStorage.getItem('aT'),
 		}).then((res) => {
