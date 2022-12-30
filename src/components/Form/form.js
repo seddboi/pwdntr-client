@@ -17,6 +17,7 @@ import { usePasswordRandomizer } from '../../hooks/usePasswordRandomizer';
 import { useLocation } from 'react-router-dom';
 import Axios from 'axios';
 import '../Form/form.css';
+import { APP_URL } from '../../App';
 
 
 export function Form({theme}) {
@@ -36,7 +37,7 @@ export function Form({theme}) {
 	const currentDateAndTime = dayjs().format('MM/DD/YYYY hh:mm');
 
 	const addPassword = async () => {
-		await Axios.post('http://localhost:3001/add', {
+		await Axios.post(APP_URL + '/add', {
 			userID: location.state.user.id,
 			username: entryUsername,
 			password: password,

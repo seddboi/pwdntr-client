@@ -3,7 +3,7 @@ import Axios from 'axios';
 import { Box, AppBar, Toolbar, TextField, Typography, Button, IconButton, InputAdornment } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import { theme } from '../../App'
+import { APP_URL, theme } from '../../App'
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 export function Signup() {
@@ -24,7 +24,7 @@ export function Signup() {
 	};
 
 	const signup = async () => {
-		await Axios.post('http://localhost:3001/signup', {
+		await Axios.post(APP_URL + '/signup', {
 			username: regUsername, 
 			password: regPassword, 
 			email: regEmail,

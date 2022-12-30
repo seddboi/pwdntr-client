@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { AppBar, Toolbar, IconButton, Typography, Box, List, LinearProgress, Button, Dialog, DialogTitle, DialogContent, TextField, DialogActions } from '@mui/material';
 import { Check, Menu } from '@mui/icons-material';
 import { ThemeProvider } from '@mui/material/styles';
-import { theme } from '../../App';
+import { APP_URL, theme } from '../../App';
 import { SideMenu } from '../../components/SideMenu/sidemenu';
 import { SearchBar } from '../../components/SearchBar/searchbar';
 import { PasswordItem } from '../../components/ListItem/listitem';
@@ -29,7 +29,7 @@ export function SavedPasswords() {
 
 	function fetchCollection() {
 		trackPromise(
-			Axios.get(`http://localhost:3001/saved/${location.state.user.id}`, {
+			Axios.get(APP_URL + `/saved/${location.state.user.id}`, {
 				headers: {
 					Authorization: 'Bearer ' + localStorage.getItem('aT'),
 				}
@@ -38,7 +38,7 @@ export function SavedPasswords() {
 	};
 
 	const addCustomPassword = async () => {
-		await Axios.post('http://localhost:3001/add', {
+		await Axios.post(APP_URL + '/add', {
 			userID: location.state.user.id,
 			username: customUser,
 			password: customPass,
@@ -58,7 +58,7 @@ export function SavedPasswords() {
 	}
 
 	const handleUpdate = (website, username, password) => {
-		Axios.put(`http://localhost:3001/saved/${location.state.user.id}/${selectedPassID}`, {
+		Axios.put(APP_URL + `/saved/${location.state.user.id}/${selectedPassID}`, {
 			website: website,
 			username: username,
 			password: password
@@ -72,7 +72,7 @@ export function SavedPasswords() {
 	};
 
 	const handleDelete = () => {
-		Axios.delete(`http://localhost:3001/saved/${location.state.user.id}/${selectedPassID}`, {
+		Axios.delete(APP_URL + `/saved/${location.state.user.id}/${selectedPassID}`, {
 			headers: {
 				Authorization: 'Bearer ' + localStorage.getItem('aT'),
 			}
