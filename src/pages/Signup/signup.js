@@ -30,7 +30,7 @@ export function Signup() {
 			email: regEmail,
 	}).then((res) => {
 		if (res.data.auth) {
-			localStorage.setItem('aT', JSON.stringify(res.data.token));
+			localStorage.setItem('aT', res.data.token);
 			setLoginStatus(res.data.auth);
 			setUserInfo(res.data.result);
 		} else {
