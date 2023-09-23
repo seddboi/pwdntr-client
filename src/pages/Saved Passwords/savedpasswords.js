@@ -5,8 +5,6 @@ import {
 	IconButton,
 	Typography,
 	Box,
-	List,
-	LinearProgress,
 	Button,
 	Dialog,
 	DialogTitle,
@@ -18,12 +16,11 @@ import { Check, Menu } from '@mui/icons-material';
 import { ThemeProvider } from '@mui/material/styles';
 import { APP_URL, theme } from '../../App';
 import { SideMenu } from '../../components/SideMenu/sidemenu';
-import { SearchBar } from '../../components/SearchBar/searchbar';
-import { PasswordItem } from '../../components/ListItem/listitem';
 import { EmptyComp } from '../../components/EmptyComp/emptyComp';
 import { useLocation } from 'react-router';
 import Axios from 'axios';
 import './savedpasswords.css';
+import { PasswordEntriesDiv } from '../../components/PasswordEntries/passwordEntries';
 
 export function SavedPasswords() {
 	const [open, setOpen] = useState(false);
@@ -40,19 +37,18 @@ export function SavedPasswords() {
 
 	const location = useLocation();
 	const dayjs = require('dayjs');
-	const currentDateAndTime = dayjs().format('MM/DD/YYYY hh:mm');
+	const currentDate = dayjs().format('MM/DD/YYYY');
 
 	const fetchCollection = useCallback(async () => {
-		const response = await fetch(APP_URL + `/saved/${location.state.user.id}`, {
-			method: 'GET',
+		await Axios.get(APP_URL + `/saved/${location.state.user.id}`, {
 			headers: {
 				Authorization: 'Bearer ' + localStorage.getItem('aT'),
 			},
+		}).then((data) => {
+			setIsLoading(false);
+			setCollection(data.data);
 		});
-		const data = await response.json();
-		setCollection(data);
-		setUpdatePage(!updatePage);
-		setIsLoading(false);
+		/* eslint-disable-next-line */
 	}, []);
 
 	const addCustomPassword = async () => {
@@ -62,7 +58,7 @@ export function SavedPasswords() {
 				userID: location.state.user.id,
 				username: customUser,
 				password: customPass,
-				timeCreated: currentDateAndTime,
+				timeCreated: currentDate,
 				website: customSite,
 			},
 			{
@@ -111,72 +107,27 @@ export function SavedPasswords() {
 		setOpen(!open);
 	};
 
-	const dataComp = (
-		<Box sx={{ width: '100%', maxWidth: '750px' }}>
-			<List
-				id="listed-passwords"
-				sx={{
-					width: '100%',
-					maxWidth: '750px',
-					maxHeight: '65vh',
-					overflow: 'scroll',
-					bgcolor: 'white',
-					border: '2px solid #17202A',
-					borderRadius: '15px',
-				}}
-			>
-				<SearchBar setSearchText={setSearchText} />
-				{
-					/* eslint-disable-next-line */
-					collection
-						.filter((item) => {
-							if (searchText === '') {
-								return true;
-							} else if (item.website.toLowerCase().includes(searchText.toLowerCase())) {
-								return true;
-							}
-						})
-						.map((item) => (
-							<PasswordItem
-								item={item}
-								index={item.passwordID}
-								selectedPassId={selectedPassID}
-								setSelectedPassID={setSelectedPassID}
-								selectedButton={selectedButton}
-								setSelectedButton={setSelectedButton}
-								handleUpdate={handleUpdate}
-								handleDelete={handleDelete}
-								key={item.passwordID}
-							/>
-						))
-				}
-			</List>
-		</Box>
-	);
+	const isEmpty =
+		collection.length > 0 ? (
+			<PasswordEntriesDiv
+				entries={collection}
+				selectedID={selectedPassID}
+				setSelectedID={setSelectedPassID}
+				searchText={searchText}
+				setSearchText={setSearchText}
+				selectedButton={selectedButton}
+				setSelectedButton={setSelectedButton}
+				handleUpdate={handleUpdate}
+				handleDelete={handleDelete}
+			/>
+		) : (
+			<EmptyComp />
+		);
 
-	const loading = (
-		<List
-			id="listed-passwords"
-			sx={{
-				width: '100%',
-				maxWidth: '750px',
-				maxHeight: '65vh',
-				overflow: 'hidden',
-				bgcolor: 'white',
-				border: '2px solid #17202A',
-				borderRadius: '15px',
-			}}
-		>
-			<LinearProgress color="primary" />
-		</List>
-	);
-
-	const isEmpty = collection.length > 0 ? dataComp : <EmptyComp />;
-
-	// eslint-disable-next-line
 	useEffect(() => {
 		setIsLoading(true);
 		fetchCollection();
+		/* eslint-disable-next-line */
 	}, [updatePage]);
 
 	return (
@@ -195,13 +146,6 @@ export function SavedPasswords() {
 				</AppBar>
 			</Box>
 			<Box component="main" sx={{ mb: 6 }}>
-				{collection.length > 0 ? (
-					<Typography variant="h5" sx={{ mt: 3, color: '#ffffff' }}>
-						Use the search bar below to filter!
-					</Typography>
-				) : (
-					<div></div>
-				)}
 				<Box
 					sx={{
 						display: 'flex',
