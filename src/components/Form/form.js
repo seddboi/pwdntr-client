@@ -19,8 +19,7 @@ import Axios from 'axios';
 import '../Form/form.css';
 import { APP_URL } from '../../App';
 
-
-export function Form({theme}) {
+export function Form({ theme }) {
 	const [isOpen, setisOpen] = useState(false);
 	const [entryUsername, setEntryUsername] = useState('');
 	const [password, setPassword] = useState('');
@@ -34,20 +33,24 @@ export function Form({theme}) {
 
 	const dayjs = require('dayjs');
 	const location = useLocation();
-	const currentDateAndTime = dayjs().format('MM/DD/YYYY hh:mm');
+	const currentDate = dayjs().format('MM/DD/YYYY');
 
 	const addPassword = async () => {
-		await Axios.post(APP_URL + '/add', {
-			userID: location.state.user.id,
-			username: entryUsername,
-			password: password,
-			timeCreated: currentDateAndTime,
-			website: entryWebsite
-		}, {
-			headers: {
-				Authorization: 'Bearer ' + localStorage.getItem('aT'),
+		await Axios.post(
+			APP_URL + '/add',
+			{
+				userID: location.state.user.id,
+				username: entryUsername,
+				password: password,
+				timeCreated: currentDate,
+				website: entryWebsite,
+			},
+			{
+				headers: {
+					Authorization: 'Bearer ' + localStorage.getItem('aT'),
+				},
 			}
-		})
+		);
 	};
 
 	const handleClickOpen = () => {
@@ -69,7 +72,7 @@ export function Form({theme}) {
 	const errorPopup = (
 		<Dialog open={isOpen} onClose={handleClickClose}>
 			<DialogTitle>Please enter a value greater tha zero and select at least one option.</DialogTitle>
-		</Dialog>	
+		</Dialog>
 	);
 
 	const successPopup = (
@@ -94,13 +97,7 @@ export function Form({theme}) {
 		}
 	};
 
-	const randomPass = usePasswordRandomizer(
-		parseInt(characterEntry),
-		isUppercase,
-		isLowercase,
-		isNumbers,
-		isSpecial
-	);
+	const randomPass = usePasswordRandomizer(parseInt(characterEntry), isUppercase, isLowercase, isNumbers, isSpecial);
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -193,20 +190,14 @@ export function Form({theme}) {
 						sx={{ mb: 3 }}
 					/>
 				</FormGroup>
-					<Box className="bottom-section">
-						<Container>
-							<Button
-								className="gobutton"
-								variant="contained"
-								color="primary"
-								size="large"
-								onClick={handleClickOpen}
-							>
-								Generate
-							</Button>
-						</Container>
-						{popupSwitcher()}
-					</Box>
+				<Box className="bottom-section">
+					<Container>
+						<Button className="gobutton" variant="contained" color="primary" size="large" onClick={handleClickOpen}>
+							Generate
+						</Button>
+					</Container>
+					{popupSwitcher()}
+				</Box>
 			</Container>
 		</ThemeProvider>
 	);
