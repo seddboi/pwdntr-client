@@ -21,11 +21,12 @@ import { useLocation } from 'react-router';
 import Axios from 'axios';
 import './savedpasswords.css';
 import { PasswordEntriesDiv } from '../../components/PasswordEntries/passwordEntries';
+import { Loader } from '../../components/Loader/loader';
 
 export function SavedPasswords() {
 	const [open, setOpen] = useState(false);
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 	const [collection, setCollection] = useState([]);
 	const [selectedPassID, setSelectedPassID] = useState(null);
 	const [selectedButton, setSelectedButton] = useState(null);
@@ -43,10 +44,11 @@ export function SavedPasswords() {
 			headers: {
 				Authorization: 'Bearer ' + localStorage.getItem('aT'),
 			},
-		}).then((data) => {
-			setIsLoading(false);
-			setCollection(data.data);
-		});
+		})
+			.then((data) => {
+				setCollection(data.data);
+			})
+			.then(() => setIsLoading(false));
 		/* eslint-disable-next-line */
 	}, []);
 
@@ -156,7 +158,7 @@ export function SavedPasswords() {
 						mr: 2,
 					}}
 				>
-					{/* {loading ? loading : isEmpty} */ isEmpty}
+					{isLoading ? <Loader /> : isEmpty}
 				</Box>
 				<Box>
 					<Button color="primary" variant="contained" onClick={() => setIsDialogOpen(true)}>
