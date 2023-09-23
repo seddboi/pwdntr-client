@@ -26,7 +26,6 @@ export function SavedPasswords() {
 	const [open, setOpen] = useState(false);
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const [updatePage, setUpdatePage] = useState(false);
 	const [collection, setCollection] = useState([]);
 	const [selectedPassID, setSelectedPassID] = useState(null);
 	const [selectedButton, setSelectedButton] = useState(null);
@@ -68,7 +67,7 @@ export function SavedPasswords() {
 			}
 		);
 
-		setUpdatePage(!updatePage);
+		fetchCollection();
 	};
 
 	const handleDialogClose = () => {
@@ -90,7 +89,7 @@ export function SavedPasswords() {
 			}
 		);
 
-		setUpdatePage(!updatePage);
+		fetchCollection();
 	};
 
 	const handleDelete = () => {
@@ -100,7 +99,7 @@ export function SavedPasswords() {
 			},
 		});
 
-		setUpdatePage(!updatePage);
+		fetchCollection();
 	};
 
 	const handleDrawer = () => {
@@ -125,10 +124,9 @@ export function SavedPasswords() {
 		);
 
 	useEffect(() => {
-		setIsLoading(true);
 		fetchCollection();
 		/* eslint-disable-next-line */
-	}, [updatePage]);
+	}, [fetchCollection, collection]);
 
 	return (
 		<ThemeProvider theme={theme}>
