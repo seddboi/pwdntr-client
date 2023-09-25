@@ -20,8 +20,9 @@ export const theme = createTheme({
 		},
 	},
 });
-
+// DO NOT COMMIT THESE CHANGES
 export const APP_URL = 'https://pwdntr-server-production.up.railway.app';
+// export const APP_URL = 'http://localhost:3001';
 
 function App() {
 	return (
