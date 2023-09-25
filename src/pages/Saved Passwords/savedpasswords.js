@@ -42,7 +42,7 @@ export function SavedPasswords() {
 	const fetchCollection = useCallback(async () => {
 		await Axios.get(APP_URL + `/saved/${location.state.user.id}`, {
 			headers: {
-				Authorization: 'Bearer ' + localStorage.getItem('aT'),
+				Authorization: 'Bearer ' + sessionStorage.getItem('aT'),
 			},
 		})
 			.then((data) => {
@@ -64,7 +64,7 @@ export function SavedPasswords() {
 			},
 			{
 				headers: {
-					Authorization: 'Bearer ' + localStorage.getItem('aT'),
+					Authorization: 'Bearer ' + sessionStorage.getItem('aT'),
 				},
 			}
 		);
@@ -86,7 +86,7 @@ export function SavedPasswords() {
 			},
 			{
 				headers: {
-					Authorization: 'Bearer ' + localStorage.getItem('aT'),
+					Authorization: 'Bearer ' + sessionStorage.getItem('aT'),
 				},
 			}
 		);
@@ -97,7 +97,7 @@ export function SavedPasswords() {
 	const handleDelete = () => {
 		Axios.delete(APP_URL + `/saved/${location.state.user.id}/${selectedPassID}`, {
 			headers: {
-				Authorization: 'Bearer ' + localStorage.getItem('aT'),
+				Authorization: 'Bearer ' + sessionStorage.getItem('aT'),
 			},
 		});
 
