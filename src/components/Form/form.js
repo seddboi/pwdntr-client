@@ -4,7 +4,7 @@ import {
 	Box,
 	FormGroup,
 	FormControlLabel,
-	TextField,
+	InputBase,
 	Checkbox,
 	Button,
 	Typography,
@@ -81,8 +81,10 @@ export function Form({ theme }) {
 			isOpen={isOpen}
 			password={password}
 			addPassword={addPassword}
+			entryUsername={entryUsername}
 			setEntryUsername={setEntryUsername}
 			setEntryPassword={setPassword}
+			entryWebsite={entryWebsite}
 			setEntryWebsite={setEntryWebsite}
 			isSubmitClicked={isSubmitClicked}
 			setIsSubmitClicked={setIsSubmitClicked}
@@ -103,33 +105,38 @@ export function Form({ theme }) {
 		<ThemeProvider theme={theme}>
 			<Container>
 				<FormGroup>
-					<TextField
+					<InputBase
 						id="number-input"
-						label="How many characters?"
+						placeholder="How many characters?"
 						type="number"
-						InputProps={{ inputProps: { min: 0 } }}
+						inputProps={{ min: 0 }}
 						color="primary"
 						value={characterEntry}
 						onChange={(e) => {
 							setCharacterEntry(e.target.value);
 						}}
-						sx={{ mb: 3 }}
+						sx={{
+							py: '5px',
+							px: 2,
+							mb: 2,
+							border: '1px solid rgba(0, 0, 0, 0.4)',
+							backgroundColor: '#ffffff',
+						}}
 					/>
 					<FormControlLabel
-						color="primary"
 						control={
 							<Checkbox
-								className="checkbox"
-								color="primary"
+								color="button"
 								size="large"
 								onChange={() => {
 									setIsUppercase(!isUppercase);
 								}}
 								checked={isUppercase}
+								sx={{ color: '#D3D3D3' }}
 							/>
 						}
 						label={
-							<Typography className="checkbox" variant="button">
+							<Typography variant="button" sx={{ color: '#eeeeee' }}>
 								Uppercase Letters
 							</Typography>
 						}
@@ -138,16 +145,17 @@ export function Form({ theme }) {
 					<FormControlLabel
 						control={
 							<Checkbox
-								color="primary"
+								color="button"
 								size="large"
 								onChange={() => {
 									setIsLowercase(!isLowercase);
 								}}
 								checked={isLowercase}
+								sx={{ color: '#D3D3D3' }}
 							/>
 						}
 						label={
-							<Typography className="checkbox" variant="button">
+							<Typography variant="button" sx={{ color: '#eeeeee' }}>
 								Lowercase Letters
 							</Typography>
 						}
@@ -156,16 +164,17 @@ export function Form({ theme }) {
 					<FormControlLabel
 						control={
 							<Checkbox
-								color="primary"
+								color="button"
 								size="large"
 								onChange={() => {
 									setIsNumbers(!isNumbers);
 								}}
 								checked={isNumbers}
+								sx={{ color: '#D3D3D3' }}
 							/>
 						}
 						label={
-							<Typography className="checkbox" variant="button">
+							<Typography variant="button" sx={{ color: '#eeeeee' }}>
 								Numbers
 							</Typography>
 						}
@@ -174,16 +183,17 @@ export function Form({ theme }) {
 					<FormControlLabel
 						control={
 							<Checkbox
-								color="primary"
+								color="button"
 								size="large"
 								onChange={() => {
 									setIsSpecial(!isSpecial);
 								}}
 								checked={isSpecial}
+								sx={{ color: '#D3D3D3' }}
 							/>
 						}
 						label={
-							<Typography className="checkbox" variant="button">
+							<Typography variant="button" sx={{ color: '#eeeeee' }}>
 								Special Characters
 							</Typography>
 						}
@@ -192,7 +202,7 @@ export function Form({ theme }) {
 				</FormGroup>
 				<Box className="bottom-section">
 					<Container>
-						<Button className="gobutton" variant="contained" color="primary" size="large" onClick={handleClickOpen}>
+						<Button className="gobutton" variant="contained" color="button" size="large" onClick={handleClickOpen}>
 							Generate
 						</Button>
 					</Container>

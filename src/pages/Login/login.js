@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import { Box, AppBar, Toolbar, TextField, Typography, Button, InputAdornment, IconButton } from '@mui/material';
+import { Box, AppBar, Toolbar, InputLabel, InputBase, Typography, Button, InputAdornment, IconButton } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { theme } from '../../App';
@@ -14,7 +14,7 @@ export function Login() {
 	const [loginStatus, setLoginStatus] = useState(false);
 	const [userInfo, setUserInfo] = useState({});
 	const [loginErrorMessage, setLoginErrorMessage] = useState('');
-	const [loginError, setLoginError] = useState(false);
+	// const [loginError, setLoginError] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -33,8 +33,10 @@ export function Login() {
 				setUserInfo(res.data.result);
 			} else {
 				setLoginErrorMessage(res.data.message);
-				setLoginError(true);
+				// setLoginError(true);
 			}
+			setLoginUsername('');
+			setLoginPassword('');
 		});
 	};
 
@@ -57,24 +59,26 @@ export function Login() {
 									display: { xs: 'none', sm: 'block' },
 									flexGrow: 1,
 									textAlign: 'start',
-									letterSpacing: { xs: 'none', sm: '0.4em', md: '0.6em' },
+									letterSpacing: { xs: 'none', sm: '0.2em', md: '0.4em' },
 								}}
 							>
 								Passwordinator
 							</Typography>
 							<Button
-								color="inherit"
+								color="button"
 								onClick={() => {
 									navigate('/');
 								}}
+								sx={{ fontSize: '20px' }}
 							>
 								Generator
 							</Button>
 							<Button
-								color="inherit"
+								color="button"
 								onClick={() => {
 									navigate('/signup');
 								}}
+								sx={{ fontSize: '20px' }}
 							>
 								Signup
 							</Button>
@@ -82,48 +86,69 @@ export function Login() {
 					</AppBar>
 				</Box>
 				<Box component="form" sx={{ display: 'flex', flexDirection: 'column', width: '90%', maxWidth: '500px', m: 4 }}>
-					<Typography variant="h2" color="#ffffff" sx={{ mb: '70px' }}>
+					<Typography variant="h2" color="#ffffff" sx={{ mb: 5 }}>
 						Welcome Back!
 					</Typography>
-					<TextField
+					<InputLabel htmlFor="login-username" sx={{ color: '#eeeeee', fontSize: '20px', textAlign: 'left' }}>
+						Username
+					</InputLabel>
+					<InputBase
 						id="login-username"
 						autoComplete="username"
-						label="Username"
-						error={loginError}
-						variant="outlined"
+						placeholder="johndoe123"
+						value={loginUsername}
 						onChange={(e) => {
-							setLoginUsername(e.target.value);
-							setLoginError(false);
+							setLoginUsername(e.target.value.trim());
+							// setLoginError(false);
 							setLoginErrorMessage('');
 						}}
-						sx={{ mt: 2, mb: 2 }}
+						sx={{
+							py: '5px',
+							px: 2,
+							mb: 2,
+							border: '1px solid rgba(0, 0, 0, 0.4)',
+							backgroundColor: '#ffffff',
+						}}
 					/>
-					<TextField
+
+					<InputLabel htmlFor="login-password" sx={{ color: '#eeeeee', fontSize: '20px', textAlign: 'left' }}>
+						Password
+					</InputLabel>
+					<InputBase
 						id="login-password"
 						autoComplete="password"
-						label="Password"
-						error={loginError}
+						placeholder="randompass123"
+						value={loginPassword}
 						type={showPassword ? 'text' : 'password'}
-						variant="outlined"
 						onChange={(e) => {
-							setLoginPassword(e.target.value);
-							setLoginError(false);
+							setLoginPassword(e.target.value.trim());
+							// setLoginError(false);
 							setLoginErrorMessage('');
 						}}
-						InputProps={{
-							endAdornment: (
-								<InputAdornment position="end">
-									<IconButton onClick={handleVisibility}>{showPassword ? <VisibilityOff /> : <Visibility />}</IconButton>
-								</InputAdornment>
-							),
+						endAdornment={
+							<InputAdornment position="end">
+								<IconButton onClick={handleVisibility}>{showPassword ? <VisibilityOff /> : <Visibility />}</IconButton>
+							</InputAdornment>
+						}
+						sx={{
+							py: '5px',
+							px: 2,
+							mb: 2,
+							border: '1px solid rgba(0, 0, 0, 0.4)',
+							backgroundColor: '#ffffff',
 						}}
-						sx={{ mt: 2, mb: 2 }}
 					/>
-					<Typography id="submitMessage" variant="h6" sx={{ color: 'red', mb: 8 }}>
+					<Typography id="submitMessage" variant="h6" sx={{ color: 'red', mb: 5, fontSize: '20px' }}>
 						{loginErrorMessage}
 					</Typography>
 				</Box>
-				<Button color="primary" variant="contained" size="large" onClick={login} sx={{ mb: 8 }}>
+				<Button
+					color="button"
+					variant="contained"
+					size="large"
+					disabled={loginUsername === '' || loginPassword === '' ? true : false}
+					onClick={login}
+				>
 					Login
 				</Button>
 			</Box>

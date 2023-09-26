@@ -1,77 +1,103 @@
 import React from 'react';
-import { Container, Box, Typography, List, ListItem, Collapse, Divider, IconButton } from '@mui/material';
+import { Container, Box, Typography, Collapse, Divider, IconButton } from '@mui/material';
 import { Clear, Build, Visibility } from '@mui/icons-material';
+import './listitemdropdown.css';
 
 export function Dropdown({ item, index, open, showPassword, handleVisibility, handleDialogOpen }) {
 	return (
 		<Collapse in={open} timeout="auto" unmountOnExit>
-			<List component="div">
-				<ListItem sx={{ paddingBottom: '10px' }}>
-					<Container sx={{ display: 'flex', flexDirection: 'row' }}>
-						<Container sx={{ display: 'flex', flexDirection: 'column', width: '90%', flexGrow: '2' }}>
-							<Container sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
-								<Container sx={{ maxWidth: '450px', display: 'flex', flexDirection: 'column' }}>
-									<Typography variant="subtitle1" sx={{ color: 'lightgrey', textAlign: 'center' }}>
-										Username
-									</Typography>
-									<Container sx={{ display: 'flex', height: '100%', width: 'auto', alignItems: 'center' }}>
-										<Typography variant="h6" sx={{ alignSelf: 'center', textAlign: 'center', color: '#1C5BB0' }}>
-											{item.username}
-										</Typography>
-									</Container>
-								</Container>
-								<Divider orientation="vertical" flexItem />
-								<Container sx={{ maxWidth: '500px', textAlign: 'center' }}>
-									<Typography variant="subtitle1" sx={{ color: 'lightgrey', textAlign: 'center' }}>
-										Date Created
-									</Typography>
-									<Container>
-										<Typography variant="h6" sx={{ textAlign: 'center', color: '#1C5BB0' }}>
-											{item.timeCreated}
-										</Typography>
-									</Container>
-								</Container>
+			<Container sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, mb: { xs: 3 } }}>
+				<Container
+					className="userdate&pass"
+					sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1, mt: 2, mb: { xs: 1, sm: 2 } }}
+				>
+					<Container className="user&date" sx={{ display: 'flex', justifyContent: 'center' }}>
+						<Box sx={{ display: 'flex', flexDirection: 'column', whiteSpace: 'normal', width: '100%' }}>
+							<Typography variant="subtitle1" sx={{ color: 'lightgrey', textAlign: 'center' }}>
+								Username
+							</Typography>
+							<Container sx={{ display: 'flex', height: '100%', width: 'auto', alignItems: 'center' }}>
+								<Typography variant="h6" sx={{ alignSelf: 'center', textAlign: 'center', color: '#2799ff' }}>
+									{item.username}
+								</Typography>
 							</Container>
-							<Divider flexItem sx={{ mt: 2, mb: 2 }} />
-							<Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-								<Box>
-									<Typography variant="subtitle1" sx={{ color: 'lightgrey', textAlign: 'center' }}>
-										Password
-									</Typography>
-									<Typography variant="h6" sx={{ textAlign: 'center', color: '#1C5BB0', overflowWrap: 'break-word' }}>
-										{showPassword ? item.password : '••••••••••'}
-									</Typography>
-								</Box>
-								<IconButton onClick={handleVisibility}>
-									{showPassword ? <Visibility sx={{ display: 'none' }} /> : <Visibility />}
-								</IconButton>
+						</Box>
+
+						<Divider orientation="vertical" color="white" flexItem />
+
+						<Box sx={{ textAlign: 'center', width: '100%' }}>
+							<Typography variant="subtitle1" sx={{ color: 'lightgrey', textAlign: 'center' }}>
+								Date Created
+							</Typography>
+							<Container>
+								<Typography variant="h6" sx={{ textAlign: 'center', color: '#2799ff' }}>
+									{item.timeCreated}
+								</Typography>
 							</Container>
-						</Container>
-						<Container
-							passwordid={index}
-							sx={{ width: '10%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
-						>
-							<IconButton
-								id="edit"
-								color="primary"
-								onClick={(e) => handleDialogOpen(e)}
-								sx={{ mt: 1, mb: 1, height: '50px', width: '50px', backgroundColor: '#F7F9F9' }}
-							>
-								<Build sx={{ width: '100%', height: 'auto' }} />
-							</IconButton>
-							<IconButton
-								id="delete"
-								color="primary"
-								onClick={(e) => handleDialogOpen(e)}
-								sx={{ mt: 1, mb: 1, height: '50px', width: '50px', backgroundColor: '#F7F9F9' }}
-								passwordid={item.passwordID}
-							>
-								<Clear sx={{ width: '100%', height: 'auto' }} />
-							</IconButton>
-						</Container>
+						</Box>
 					</Container>
-				</ListItem>
-			</List>
+
+					<Divider color="white" flexItem sx={{ mt: 2, mb: 2 }} />
+
+					<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+						<Box>
+							<Typography variant="subtitle1" sx={{ color: 'lightgrey', textAlign: 'center' }}>
+								Password
+							</Typography>
+							<Typography variant="h6" sx={{ textAlign: 'center', color: '#2799ff', overflowWrap: 'break-word' }}>
+								{showPassword ? item.password : '••••••••••'}
+							</Typography>
+						</Box>
+						<IconButton className={showPassword ? 'hide-pass-vis-button' : 'show-pass-vis-button'} onClick={handleVisibility}>
+							<Visibility />
+						</IconButton>
+					</Box>
+				</Container>
+
+				<Box
+					passwordid={index}
+					sx={{
+						display: 'flex',
+						flexDirection: { xs: 'row', sm: 'column' },
+						alignItems: 'center',
+						justifyContent: { xs: 'space-around', sm: 'center' },
+					}}
+				>
+					<IconButton
+						id="edit"
+						onClick={(e) => handleDialogOpen(e)}
+						sx={{
+							mt: 1,
+							mb: 1,
+							height: '50px',
+							width: '50px',
+							backgroundColor: '#F7F9F9',
+							'&:hover': {
+								bgcolor: '#c6c6cc',
+							},
+						}}
+					>
+						<Build sx={{ width: '100%', height: 'auto' }} />
+					</IconButton>
+					<IconButton
+						id="delete"
+						onClick={(e) => handleDialogOpen(e)}
+						sx={{
+							mt: 1,
+							mb: 1,
+							height: '50px',
+							width: '50px',
+							backgroundColor: '#F7F9F9',
+							'&:hover': {
+								bgcolor: '#c6c6cc',
+							},
+						}}
+						passwordid={item.passwordID}
+					>
+						<Clear sx={{ width: '100%', height: 'auto' }} />
+					</IconButton>
+				</Box>
+			</Container>
 		</Collapse>
 	);
 }

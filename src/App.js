@@ -14,15 +14,44 @@ import { createTheme } from '@mui/material/styles';
 export const theme = createTheme({
 	palette: {
 		primary: {
-			main: '#212F3D',
-			light: '#566573',
-			dark: '#17202A',
+			main: '#5A5A5A',
+			light: '#8b8b8b',
+			dark: '#3e3e3e',
+			contrastText: '#eeeeee',
+		},
+		secondary: {
+			main: '#808080',
+			light: '#a6a6a6',
+			dark: '#595959',
+			contrastText: '#181818',
+		},
+		error: {
+			main: '#cc0000',
+			light: '#d63232',
+			dark: '#a30000',
+			contrastText: '#ffffff',
+		},
+		info: {
+			main: '#F8F8FF',
+			light: '#f9f9ff',
+			dark: '#c6c6cc',
+			contrastText: '#181819',
+		},
+		button: {
+			main: '#D3D3D3',
+			light: '#e0e0e0',
+			dark: '#939393',
+			contrastText: '#151515',
+		},
+	},
+	typography: {
+		button: {
+			textTransform: 'none',
 		},
 	},
 });
-// DO NOT COMMIT THESE CHANGES
+
 export const APP_URL = 'https://pwdntr-server-production.up.railway.app';
-// export const APP_URL = 'http://localhost:3001';
 
 function App() {
 	return (

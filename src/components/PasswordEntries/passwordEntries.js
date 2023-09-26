@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Box, Typography } from '@mui/material';
+import { List, Box } from '@mui/material';
 import { PasswordItem } from '../ListItem/listitem';
 import { SearchBar } from '../SearchBar/searchbar';
 
@@ -15,40 +15,58 @@ export function PasswordEntriesDiv({
 	handleDelete,
 }) {
 	return (
-		<Box sx={{ width: '100%', maxWidth: '750px' }}>
-			<Typography variant="h5" sx={{ mt: 3, mb: 3, color: '#ffffff' }}>
-				Use the search bar below to filter!
-			</Typography>
-			<Box>
-				<List
-					id="listed-passwords"
+		<Box className="passwordEntries-container" sx={{ width: '100%' }}>
+			<Box className="searchBar-container" sx={{ mb: 3, px: 2 }}>
+				<SearchBar setSearchText={setSearchText} />
+			</Box>
+			<Box
+				className="passwordEntriesList-container-outer"
+				sx={{
+					display: 'flex',
+					justifyContent: 'center',
+					py: 1,
+					width: '100%',
+				}}
+			>
+				<Box
 					sx={{
+						display: 'flex',
+						alignItems: 'center',
+						flexDirection: 'column',
 						width: '100%',
-						maxWidth: '750px',
-						maxHeight: '65vh',
-						overflow: 'scroll',
-						bgcolor: 'white',
-						border: '2px solid #17202A',
-						borderRadius: '15px',
+						maxWidth: { sm: '1000px' },
+						backgroundColor: '#3e3e3e',
+						borderRadius: '5px',
+						py: 1,
 					}}
 				>
-					<SearchBar setSearchText={setSearchText} />
-					{entries
-						.filter((item) => item.website.toLowerCase().includes(searchText.toLowerCase()))
-						.map((entry) => (
-							<PasswordItem
-								item={entry}
-								index={entry.passwordID}
-								selectedPassId={selectedID}
-								setSelectedPassID={setSelectedID}
-								selectedButton={selectedButton}
-								setSelectedButton={setSelectedButton}
-								handleUpdate={handleUpdate}
-								handleDelete={handleDelete}
-								key={entry.passwordID}
-							/>
-						))}
-				</List>
+					<List
+						id="listed-passwords"
+						sx={{
+							maxHeight: { xs: '65vh', sm: '55vh' },
+							minHeight: { sm: '400px' },
+							width: '100%',
+							maxWidth: { sm: '900px' },
+							overflow: 'scroll',
+						}}
+					>
+						{entries
+							.filter((item) => item.website.toLowerCase().includes(searchText.toLowerCase()))
+							.map((entry) => (
+								<PasswordItem
+									item={entry}
+									index={entry.passwordID}
+									selectedPassId={selectedID}
+									setSelectedPassID={setSelectedID}
+									selectedButton={selectedButton}
+									setSelectedButton={setSelectedButton}
+									handleUpdate={handleUpdate}
+									handleDelete={handleDelete}
+									key={entry.passwordID}
+								/>
+							))}
+					</List>
+				</Box>
 			</Box>
 		</Box>
 	);

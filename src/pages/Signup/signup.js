@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
-import { Box, AppBar, Toolbar, TextField, Typography, Button, IconButton, InputAdornment } from '@mui/material';
+import { Box, AppBar, Toolbar, InputLabel, InputBase, Typography, Button, IconButton, InputAdornment } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { APP_URL, theme } from '../../App';
@@ -14,7 +14,7 @@ export function Signup() {
 	const [loginStatus, setLoginStatus] = useState(false);
 	const [userInfo, setUserInfo] = useState({});
 	const [signupErrorMessage, setSignupErrorMessage] = useState('');
-	const [signupError, setSignupError] = useState(false);
+	// const [signupError, setSignupError] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -29,13 +29,17 @@ export function Signup() {
 			email: regEmail,
 		}).then((res) => {
 			if (res.data.auth) {
+				console.log(res.data);
 				sessionStorage.setItem('aT', res.data.token);
 				setLoginStatus(res.data.auth);
 				setUserInfo(res.data.result);
 			} else {
 				setSignupErrorMessage(res.data.message);
-				setSignupError(true);
+				// setSignupError(true);
 			}
+			setRegUsername('');
+			setRegEmail('');
+			setRegPassword('');
 		});
 	};
 
@@ -58,24 +62,26 @@ export function Signup() {
 									display: { xs: 'none', sm: 'block' },
 									flexGrow: 1,
 									textAlign: 'start',
-									letterSpacing: { xs: 'none', sm: '0.4em', md: '0.6em' },
+									letterSpacing: { xs: 'none', sm: '0.2em', md: '0.4em' },
 								}}
 							>
 								Passwordinator
 							</Typography>
 							<Button
-								color="inherit"
+								color="button"
 								onClick={() => {
 									navigate('/');
 								}}
+								sx={{ fontSize: '20px' }}
 							>
 								Generator
 							</Button>
 							<Button
-								color="inherit"
+								color="button"
 								onClick={() => {
 									navigate('/login');
 								}}
+								sx={{ fontSize: '20px' }}
 							>
 								Login
 							</Button>
@@ -83,47 +89,84 @@ export function Signup() {
 					</AppBar>
 				</Box>
 				<Box component="form" sx={{ display: 'flex', flexDirection: 'column', width: '90%', maxWidth: '500px', margin: 4 }}>
-					<Typography variant="h2" color="#ffffff" sx={{ mb: '70px' }}>
+					<Typography variant="h2" color="#ffffff" sx={{ mb: 1 }}>
 						Signup Below!
 					</Typography>
-					<TextField
-						label="Username"
-						variant="outlined"
+
+					<InputLabel htmlFor="signup-username" sx={{ color: '#eeeeee', fontSize: '20px', textAlign: 'left' }}>
+						Username
+					</InputLabel>
+					<InputBase
+						id="signup-username"
+						placeholder="Username"
+						value={regUsername}
 						onChange={(e) => {
-							setRegUsername(e.target.value);
+							setRegUsername(e.target.value.trim());
 						}}
-						sx={{ mt: 2, mb: 2 }}
+						sx={{
+							py: '5px',
+							px: 2,
+							mb: 2,
+							border: '1px solid rgba(0, 0, 0, 0.4)',
+							backgroundColor: '#ffffff',
+						}}
 					/>
-					<TextField
-						label="Email"
-						variant="outlined"
-						error={signupError}
+
+					<InputLabel htmlFor="signup-email" sx={{ color: '#eeeeee', fontSize: '20px', textAlign: 'left' }}>
+						Email
+					</InputLabel>
+					<InputBase
+						id="signup-email"
+						placeholder="Email"
+						value={regEmail}
+						// error={signupError}
 						onChange={(e) => {
-							setRegEmail(e.target.value);
+							setRegEmail(e.target.value.trim());
 						}}
-						sx={{ mt: 2, mb: 2 }}
+						sx={{
+							py: '5px',
+							px: 2,
+							mb: 2,
+							border: '1px solid rgba(0, 0, 0, 0.4)',
+							backgroundColor: '#ffffff',
+						}}
 					/>
-					<TextField
-						label="Password"
+
+					<InputLabel htmlFor="signup-password" sx={{ color: '#eeeeee', fontSize: '20px', textAlign: 'left' }}>
+						Password
+					</InputLabel>
+					<InputBase
+						id="signup-password"
+						placeholder="Password"
+						value={regPassword}
 						type={showPassword ? 'text' : 'password'}
-						variant="outlined"
 						onChange={(e) => {
-							setRegPassword(e.target.value);
+							setRegPassword(e.target.value.trim());
 						}}
-						InputProps={{
-							endAdornment: (
-								<InputAdornment position="end">
-									<IconButton onClick={handleVisibility}>{showPassword ? <VisibilityOff /> : <Visibility />}</IconButton>
-								</InputAdornment>
-							),
+						endAdornment={
+							<InputAdornment position="end">
+								<IconButton onClick={handleVisibility}>{showPassword ? <VisibilityOff /> : <Visibility />}</IconButton>
+							</InputAdornment>
+						}
+						sx={{
+							py: '5px',
+							px: 2,
+							mb: 2,
+							border: '1px solid rgba(0, 0, 0, 0.4)',
+							backgroundColor: '#ffffff',
 						}}
-						sx={{ mt: 2, mb: 2 }}
 					/>
-					<Typography id="submitMessage" variant="h6" sx={{ color: 'red', mb: 8 }}>
+					<Typography id="submitMessage" variant="h6" sx={{ color: 'red', mb: 5 }}>
 						{signupErrorMessage}
 					</Typography>
 				</Box>
-				<Button color="primary" variant="contained" size="large" onClick={signup}>
+				<Button
+					color="button"
+					variant="contained"
+					size="large"
+					disabled={regUsername === '' || regEmail === '' || regPassword === '' ? true : false}
+					onClick={signup}
+				>
 					Signup
 				</Button>
 			</Box>

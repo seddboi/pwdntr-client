@@ -9,8 +9,9 @@ import {
 	Dialog,
 	DialogTitle,
 	DialogContent,
-	TextField,
 	DialogActions,
+	InputLabel,
+	InputBase,
 } from '@mui/material';
 import { Check, Menu } from '@mui/icons-material';
 import { ThemeProvider } from '@mui/material/styles';
@@ -139,7 +140,15 @@ export function SavedPasswords() {
 							<Menu fontSize="large" sx={{ color: 'white' }} />
 						</IconButton>
 						<SideMenu open={open} onClose={handleDrawer} isHome={false} />
-						<Typography variant="h4" sx={{ ml: 2, mr: 2, flexGrow: 1, textAlign: { xs: 'center', sm: 'start' } }}>
+						<Typography
+							variant="h5"
+							sx={{
+								mx: 2,
+								flexGrow: 1,
+								fontSize: '25px',
+								textAlign: { xs: 'center', sm: 'start' },
+							}}
+						>
 							Saved Passwords
 						</Typography>
 					</Toolbar>
@@ -152,46 +161,56 @@ export function SavedPasswords() {
 						flexDirection: 'column',
 						justifyContent: 'center',
 						alignItems: 'center',
-						mt: 3,
 						mb: 3,
-						ml: 2,
-						mr: 2,
 					}}
 				>
 					{isLoading ? <Loader /> : isEmpty}
 				</Box>
 				<Box>
-					<Button color="primary" variant="contained" onClick={() => setIsDialogOpen(true)}>
+					<Button color="button" variant="contained" disabled={isLoading ? true : false} onClick={() => setIsDialogOpen(true)}>
 						Custom Entry
 					</Button>
 					<Dialog open={isDialogOpen}>
-						<DialogTitle sx={{ color: '#ffffff' }}>Fill the form below and click the check to submit.</DialogTitle>
+						<DialogTitle>Fill the form below and click the check to submit.</DialogTitle>
 						<DialogContent>
-							<TextField
+							<InputLabel htmlFor="input-custom-website" sx={{ color: '#eeeeee', fontSize: '20px' }}>
+								What website will this be for?
+							</InputLabel>
+							<InputBase
+								id="input-custom-website"
 								fullWidth
-								color="primary"
 								onChange={(e) => setCustomSite(e.target.value.trim())}
-								label="What website will this be for?"
-								sx={{ mt: 2, mb: 1 }}
+								placeholder="Youtube/Facebook/etc."
+								sx={{ mb: 3, px: 1, py: '5px', border: '1px solid rgba(0, 0, 0, 0.4)', backgroundColor: '#F8F8FF' }}
 							/>
-							<TextField
+
+							<InputLabel htmlFor="input-custom-username" sx={{ color: '#eeeeee', fontSize: '20px' }}>
+								What username will you be using?
+							</InputLabel>
+							<InputBase
+								id="input-custom-username"
 								fullWidth
-								color="primary"
 								onChange={(e) => setCustomUser(e.target.value.trim())}
-								label="What username will you be using?"
-								sx={{ mt: 2, mb: 2 }}
+								placeholder="johndoe123"
+								sx={{ mb: 3, px: 1, py: '5px', border: '1px solid rgba(0, 0, 0, 0.4)', backgroundColor: '#F8F8FF' }}
 							/>
-							<TextField
+
+							<InputLabel htmlFor="input-custom-password" sx={{ color: '#eeeeee', fontSize: '20px' }}>
+								What password will you be using?
+							</InputLabel>
+							<InputBase
+								id="input-custom-password"
 								fullWidth
-								color="primary"
 								onChange={(e) => setCustomPass(e.target.value.trim())}
-								label="What password will you be using?"
-								sx={{ mt: 2, mb: 2 }}
+								placeholder="randompass123"
+								sx={{ mb: 3, px: 1, py: '5px', border: '1px solid rgba(0, 0, 0, 0.4)', backgroundColor: '#F8F8FF' }}
 							/>
 						</DialogContent>
 						<DialogActions>
 							<Button
 								variant="contained"
+								color="button"
+								disabled={customUser === '' || customSite === '' || customPass === '' ? true : false}
 								onClick={() => {
 									addCustomPassword();
 									handleDialogClose();
@@ -201,6 +220,7 @@ export function SavedPasswords() {
 							</Button>
 							<Button
 								variant="contained"
+								color="button"
 								onClick={() => {
 									handleDialogClose();
 								}}
