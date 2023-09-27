@@ -50,6 +50,7 @@ export function SavedPasswords() {
 				setCollection(data.data);
 			})
 			.then(() => setIsLoading(false));
+		/* eslint-disable-next-line */
 	}, []);
 
 	const addCustomPassword = () => {
