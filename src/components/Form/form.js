@@ -47,7 +47,7 @@ export function Form({ theme }) {
 			},
 			{
 				headers: {
-					Authorization: 'Bearer ' + localStorage.getItem('aT'),
+					Authorization: 'Bearer ' + sessionStorage.getItem('aT'),
 				},
 			}
 		);
