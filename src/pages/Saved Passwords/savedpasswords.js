@@ -50,11 +50,10 @@ export function SavedPasswords() {
 				setCollection(data.data);
 			})
 			.then(() => setIsLoading(false));
-		/* eslint-disable-next-line */
 	}, []);
 
-	const addCustomPassword = async () => {
-		await Axios.post(
+	const addCustomPassword = () => {
+		Axios.post(
 			APP_URL + '/add',
 			{
 				userID: location.state.user.id,
@@ -68,9 +67,9 @@ export function SavedPasswords() {
 					Authorization: 'Bearer ' + sessionStorage.getItem('aT'),
 				},
 			}
-		);
-
-		fetchCollection();
+		).then(() => {
+			fetchCollection();
+		});
 	};
 
 	const handleDialogClose = () => {
@@ -90,9 +89,9 @@ export function SavedPasswords() {
 					Authorization: 'Bearer ' + sessionStorage.getItem('aT'),
 				},
 			}
-		);
-
-		fetchCollection();
+		).then(() => {
+			fetchCollection();
+		});
 	};
 
 	const handleDelete = () => {
@@ -100,9 +99,9 @@ export function SavedPasswords() {
 			headers: {
 				Authorization: 'Bearer ' + sessionStorage.getItem('aT'),
 			},
+		}).then(() => {
+			fetchCollection();
 		});
-
-		fetchCollection();
 	};
 
 	const handleDrawer = () => {
@@ -129,7 +128,7 @@ export function SavedPasswords() {
 	useEffect(() => {
 		fetchCollection();
 		/* eslint-disable-next-line */
-	}, [fetchCollection, collection]);
+	}, []);
 
 	return (
 		<ThemeProvider theme={theme}>

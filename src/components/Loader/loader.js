@@ -11,7 +11,7 @@ export function Loader() {
 				height: '50px',
 				m: 4,
 				border: '8px solid #bbc1c7',
-				borderTop: '8px solid #99a2ab',
+				borderTop: '8px solid #181819',
 				borderRadius: '50%',
 			}}
 		></Box>

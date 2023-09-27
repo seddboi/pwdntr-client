@@ -76,6 +76,7 @@ export function Dropdown({ item, index, open, showPassword, handleVisibility, ha
 								bgcolor: '#c6c6cc',
 							},
 						}}
+						passwordid={item.passwordID}
 					>
 						<Build sx={{ width: '100%', height: 'auto' }} />
 					</IconButton>

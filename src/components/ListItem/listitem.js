@@ -40,7 +40,7 @@ export function PasswordItem({ item, index, setSelectedPassID, selectedButton, s
 	};
 
 	const handleDialogOpen = (e) => {
-		const passID = e.currentTarget.parentNode.getAttribute('passwordid');
+		const passID = e.currentTarget.getAttribute('passwordid');
 		const buttonTitle = e.currentTarget.getAttribute('id');
 
 		setSelectedPassID(parseInt(passID));
