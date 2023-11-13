@@ -3,6 +3,8 @@ import { List, Box } from '@mui/material';
 import { PasswordItem } from '../ListItem/listitem';
 import { SearchBar } from '../SearchBar/searchbar';
 
+import '../../pages/Saved Passwords/savedpasswords.css';
+
 export function PasswordEntriesDiv({
 	entries,
 	selectedID,
