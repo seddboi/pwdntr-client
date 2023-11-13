@@ -47,6 +47,8 @@ export function PasswordEntriesDiv({
 							minHeight: { sm: '400px' },
 							width: '100%',
 							maxWidth: { sm: '900px' },
+							overflowY: 'scroll',
+							scrollbarColor: '#161616 #3e3e3e',
 						}}
 					>
 						{entries
