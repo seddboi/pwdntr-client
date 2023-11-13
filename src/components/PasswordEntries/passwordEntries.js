@@ -48,7 +48,12 @@ export function PasswordEntriesDiv({
 							width: '100%',
 							maxWidth: { sm: '900px' },
 							overflowY: 'scroll',
-							scrollbarColor: '#161616 #3e3e3e',
+							'&::-webkit-scrollbar-track': {
+								backgroundColor: '#3e3e3e',
+							},
+							'&::-webkit-scrollbar-thumb': {
+								backgroundColor: '#161616',
+							},
 						}}
 					>
 						{entries
