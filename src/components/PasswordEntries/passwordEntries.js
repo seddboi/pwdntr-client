@@ -47,7 +47,6 @@ export function PasswordEntriesDiv({
 							minHeight: { sm: '400px' },
 							width: '100%',
 							maxWidth: { sm: '900px' },
-							overflow: 'scroll',
 						}}
 					>
 						{entries
