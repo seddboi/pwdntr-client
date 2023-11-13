@@ -41,7 +41,7 @@ export function PasswordEntriesDiv({
 					}}
 				>
 					<List
-						id="listed-passwords"
+						className="listed-passwords"
 						sx={{
 							maxHeight: { xs: '65vh', sm: '55vh' },
 							minHeight: { sm: '400px' },
