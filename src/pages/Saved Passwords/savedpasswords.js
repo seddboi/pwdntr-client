@@ -14,15 +14,14 @@ import {
 	InputBase,
 } from '@mui/material';
 import { Check, Menu } from '@mui/icons-material';
-import { ThemeProvider } from '@mui/material/styles';
-import { APP_URL, theme } from '../../App';
+import { APP_URL } from '../../App';
 import { SideMenu } from '../../components/SideMenu/sidemenu';
 import { EmptyComp } from '../../components/EmptyComp/emptyComp';
+import { PasswordEntriesDiv } from '../../components/PasswordEntries/passwordEntries';
+import { Loader } from '../../components/Loader/loader';
 import { useLocation } from 'react-router';
 import Axios from 'axios';
 import './savedpasswords.css';
-import { PasswordEntriesDiv } from '../../components/PasswordEntries/passwordEntries';
-import { Loader } from '../../components/Loader/loader';
 
 export function SavedPasswords() {
 	const [open, setOpen] = useState(false);
@@ -132,7 +131,7 @@ export function SavedPasswords() {
 	}, []);
 
 	return (
-		<ThemeProvider theme={theme}>
+		<Box>
 			<Box component="nav" sx={{ flexGrow: 1 }}>
 				<AppBar position="static">
 					<Toolbar>
@@ -231,6 +230,6 @@ export function SavedPasswords() {
 					</Dialog>
 				</Box>
 			</Box>
-		</ThemeProvider>
+		</Box>
 	);
 }

@@ -11,10 +11,9 @@ import {
 	Button,
 	InputBase,
 	InputLabel,
+	Box,
 } from '@mui/material';
 import { ExpandMore, ExpandLess, Check } from '@mui/icons-material';
-import { ThemeProvider } from '@mui/material/styles';
-import { theme } from '../../App';
 import { Dropdown } from '../ListItemDropdown/listitemdropdown';
 import './listitem.css';
 
@@ -152,7 +151,7 @@ export function PasswordItem({ item, index, setSelectedPassID, selectedButton, s
 		);
 
 	return (
-		<ThemeProvider theme={theme}>
+		<Box>
 			<Container id="item-container" key={index}>
 				<Grid container direction="row" justifyContent="center" alignItems="center">
 					<ListItemButton
@@ -186,6 +185,6 @@ export function PasswordItem({ item, index, setSelectedPassID, selectedButton, s
 				/>
 			</Container>
 			{editOrDelete}
-		</ThemeProvider>
+		</Box>
 	);
 }

@@ -36,10 +36,11 @@ export function PasswordEntriesDiv({
 						alignItems: 'center',
 						flexDirection: 'column',
 						width: '100%',
-						maxWidth: { sm: '1000px' },
+						maxWidth: { sm: '900px' },
 						backgroundColor: '#3e3e3e',
 						borderRadius: '5px',
 						py: 1,
+						mx: 2,
 					}}
 				>
 					<List
@@ -48,7 +49,7 @@ export function PasswordEntriesDiv({
 							maxHeight: { xs: '65vh', sm: '55vh' },
 							minHeight: { sm: '400px' },
 							width: '100%',
-							maxWidth: { sm: '900px' },
+							mr: 2,
 							overflowY: 'scroll',
 						}}
 					>

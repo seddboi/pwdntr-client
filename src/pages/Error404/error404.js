@@ -1,6 +1,4 @@
-import { Typography, Button } from '@mui/material';
-import { ThemeProvider } from '@mui/material/styles';
-import { theme } from '../../App';
+import { Box, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
 
@@ -8,7 +6,7 @@ export function Error404() {
 	const navigate = useNavigate();
 
 	return (
-		<ThemeProvider theme={theme}>
+		<Box>
 			<Typography variant="h4" color="white" sx={{ textAlign: 'left', m: 6 }}>
 				Error 404: Page not found...
 			</Typography>
@@ -21,6 +19,6 @@ export function Error404() {
 			>
 				Home
 			</Button>
-		</ThemeProvider>
+		</Box>
 	);
 }

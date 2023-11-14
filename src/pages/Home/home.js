@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { AppBar, Toolbar, IconButton, Typography, Box } from '@mui/material';
 import { Menu } from '@mui/icons-material';
-import { ThemeProvider } from '@mui/material/styles';
 import { useLocation } from 'react-router-dom';
-import { theme } from '../../App';
 import { GeneratorComp } from '../../components/GeneratorComp/generatorcomp';
+import { SideMenu } from '../../components/SideMenu/sidemenu';
 
 import './home.css';
-import { SideMenu } from '../../components/SideMenu/sidemenu';
 
 export function Home() {
 	const [open, setOpen] = useState(false);
@@ -23,7 +21,7 @@ export function Home() {
 	};
 
 	return (
-		<ThemeProvider theme={theme}>
+		<Box>
 			<Box component="nav" sx={{ flexGrow: 1 }}>
 				<AppBar position="static">
 					<Toolbar>
@@ -44,8 +42,8 @@ export function Home() {
 				<Typography className="subhead-title" variant="h5" sx={{ mt: 3, fontSize: '20px', color: '#eeeeee' }}>
 					Password Generator
 				</Typography>
-				<GeneratorComp theme={theme} />
+				<GeneratorComp />
 			</Box>
-		</ThemeProvider>
+		</Box>
 	);
 }
