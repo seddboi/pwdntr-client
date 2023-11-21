@@ -11,7 +11,6 @@ import {
 	Dialog,
 	DialogTitle,
 } from '@mui/material';
-import { ThemeProvider } from '@mui/material/styles';
 import { Popup } from '../Popup/popup';
 import { usePasswordRandomizer } from '../../hooks/usePasswordRandomizer';
 import { useLocation } from 'react-router-dom';
@@ -19,7 +18,7 @@ import Axios from 'axios';
 import '../Form/form.css';
 import { APP_URL } from '../../App';
 
-export function Form({ theme }) {
+export function Form() {
 	const [isOpen, setisOpen] = useState(false);
 	const [entryUsername, setEntryUsername] = useState('');
 	const [password, setPassword] = useState('');
@@ -102,113 +101,111 @@ export function Form({ theme }) {
 	const randomPass = usePasswordRandomizer(parseInt(characterEntry), isUppercase, isLowercase, isNumbers, isSpecial);
 
 	return (
-		<ThemeProvider theme={theme}>
-			<Container>
-				<FormGroup>
-					<InputBase
-						id="number-input"
-						placeholder="How many characters?"
-						type="number"
-						inputProps={{ min: 0 }}
-						color="primary"
-						value={characterEntry}
-						onChange={(e) => {
-							setCharacterEntry(e.target.value);
-						}}
-						sx={{
-							py: '5px',
-							px: 2,
-							mb: 2,
-							border: '1px solid rgba(0, 0, 0, 0.4)',
-							backgroundColor: '#ffffff',
-						}}
-					/>
-					<FormControlLabel
-						control={
-							<Checkbox
-								color="button"
-								size="large"
-								onChange={() => {
-									setIsUppercase(!isUppercase);
-								}}
-								checked={isUppercase}
-								sx={{ color: '#D3D3D3' }}
-							/>
-						}
-						label={
-							<Typography variant="button" sx={{ color: '#eeeeee' }}>
-								Uppercase Letters
-							</Typography>
-						}
-						sx={{ mb: 3 }}
-					/>
-					<FormControlLabel
-						control={
-							<Checkbox
-								color="button"
-								size="large"
-								onChange={() => {
-									setIsLowercase(!isLowercase);
-								}}
-								checked={isLowercase}
-								sx={{ color: '#D3D3D3' }}
-							/>
-						}
-						label={
-							<Typography variant="button" sx={{ color: '#eeeeee' }}>
-								Lowercase Letters
-							</Typography>
-						}
-						sx={{ mb: 3 }}
-					/>
-					<FormControlLabel
-						control={
-							<Checkbox
-								color="button"
-								size="large"
-								onChange={() => {
-									setIsNumbers(!isNumbers);
-								}}
-								checked={isNumbers}
-								sx={{ color: '#D3D3D3' }}
-							/>
-						}
-						label={
-							<Typography variant="button" sx={{ color: '#eeeeee' }}>
-								Numbers
-							</Typography>
-						}
-						sx={{ mb: 3 }}
-					/>
-					<FormControlLabel
-						control={
-							<Checkbox
-								color="button"
-								size="large"
-								onChange={() => {
-									setIsSpecial(!isSpecial);
-								}}
-								checked={isSpecial}
-								sx={{ color: '#D3D3D3' }}
-							/>
-						}
-						label={
-							<Typography variant="button" sx={{ color: '#eeeeee' }}>
-								Special Characters
-							</Typography>
-						}
-						sx={{ mb: 3 }}
-					/>
-				</FormGroup>
-				<Box className="bottom-section">
-					<Container>
-						<Button className="gobutton" variant="contained" color="button" size="large" onClick={handleClickOpen}>
-							Generate
-						</Button>
-					</Container>
-					{popupSwitcher()}
-				</Box>
-			</Container>
-		</ThemeProvider>
+		<Container>
+			<FormGroup>
+				<InputBase
+					id="number-input"
+					placeholder="How many characters?"
+					type="number"
+					inputProps={{ min: 0 }}
+					color="primary"
+					value={characterEntry}
+					onChange={(e) => {
+						setCharacterEntry(e.target.value);
+					}}
+					sx={{
+						py: '5px',
+						px: 2,
+						mb: 2,
+						border: '1px solid rgba(0, 0, 0, 0.4)',
+						backgroundColor: '#ffffff',
+					}}
+				/>
+				<FormControlLabel
+					control={
+						<Checkbox
+							color="button"
+							size="large"
+							onChange={() => {
+								setIsUppercase(!isUppercase);
+							}}
+							checked={isUppercase}
+							sx={{ color: '#D3D3D3' }}
+						/>
+					}
+					label={
+						<Typography variant="button" sx={{ color: '#eeeeee' }}>
+							Uppercase Letters
+						</Typography>
+					}
+					sx={{ mb: 3 }}
+				/>
+				<FormControlLabel
+					control={
+						<Checkbox
+							color="button"
+							size="large"
+							onChange={() => {
+								setIsLowercase(!isLowercase);
+							}}
+							checked={isLowercase}
+							sx={{ color: '#D3D3D3' }}
+						/>
+					}
+					label={
+						<Typography variant="button" sx={{ color: '#eeeeee' }}>
+							Lowercase Letters
+						</Typography>
+					}
+					sx={{ mb: 3 }}
+				/>
+				<FormControlLabel
+					control={
+						<Checkbox
+							color="button"
+							size="large"
+							onChange={() => {
+								setIsNumbers(!isNumbers);
+							}}
+							checked={isNumbers}
+							sx={{ color: '#D3D3D3' }}
+						/>
+					}
+					label={
+						<Typography variant="button" sx={{ color: '#eeeeee' }}>
+							Numbers
+						</Typography>
+					}
+					sx={{ mb: 3 }}
+				/>
+				<FormControlLabel
+					control={
+						<Checkbox
+							color="button"
+							size="large"
+							onChange={() => {
+								setIsSpecial(!isSpecial);
+							}}
+							checked={isSpecial}
+							sx={{ color: '#D3D3D3' }}
+						/>
+					}
+					label={
+						<Typography variant="button" sx={{ color: '#eeeeee' }}>
+							Special Characters
+						</Typography>
+					}
+					sx={{ mb: 3 }}
+				/>
+			</FormGroup>
+			<Box className="bottom-section">
+				<Container>
+					<Button className="gobutton" variant="contained" color="button" size="large" onClick={handleClickOpen}>
+						Generate
+					</Button>
+				</Container>
+				{popupSwitcher()}
+			</Box>
+		</Container>
 	);
 }

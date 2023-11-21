@@ -1,30 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import {
-	AppBar,
-	Toolbar,
-	IconButton,
-	Typography,
-	Box,
-	Button,
-	Dialog,
-	DialogTitle,
-	DialogContent,
-	DialogActions,
-	InputLabel,
-	InputBase,
-} from '@mui/material';
-import { Check, Menu } from '@mui/icons-material';
+import { Box, Button, Dialog, DialogTitle, DialogContent, DialogActions, InputLabel, InputBase } from '@mui/material';
+import { Check } from '@mui/icons-material';
 import { APP_URL } from '../../App';
-import { SideMenu } from '../../components/SideMenu/sidemenu';
 import { EmptyComp } from '../../components/EmptyComp/emptyComp';
 import { PasswordEntriesDiv } from '../../components/PasswordEntries/passwordEntries';
 import { Loader } from '../../components/Loader/loader';
-import { useLocation } from 'react-router';
+import { Layout } from '../layout/layout.js';
 import Axios from 'axios';
 import './savedpasswords.css';
 
 export function SavedPasswords() {
-	const [open, setOpen] = useState(false);
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 	const [collection, setCollection] = useState([]);
@@ -35,14 +20,13 @@ export function SavedPasswords() {
 	const [customUser, setCustomUser] = useState('');
 	const [customPass, setCustomPass] = useState('');
 
-	const location = useLocation();
 	const dayjs = require('dayjs');
 	const currentDate = dayjs().format('MM/DD/YYYY');
 
 	const fetchCollection = useCallback(async () => {
-		await Axios.get(APP_URL + `/saved/${location.state.user.id}`, {
+		await Axios.get(APP_URL + `/saved/${sessionStorage.getItem('_uid')}`, {
 			headers: {
-				Authorization: 'Bearer ' + sessionStorage.getItem('aT'),
+				Authorization: 'Bearer ' + sessionStorage.getItem('_at'),
 			},
 		})
 			.then((data) => {
@@ -56,7 +40,7 @@ export function SavedPasswords() {
 		Axios.post(
 			APP_URL + '/add',
 			{
-				userID: location.state.user.id,
+				userID: sessionStorage.getItem('_uid'),
 				username: customUser,
 				password: customPass,
 				timeCreated: currentDate,
@@ -64,7 +48,7 @@ export function SavedPasswords() {
 			},
 			{
 				headers: {
-					Authorization: 'Bearer ' + sessionStorage.getItem('aT'),
+					Authorization: 'Bearer ' + sessionStorage.getItem('_at'),
 				},
 			}
 		).then(() => {
@@ -78,7 +62,7 @@ export function SavedPasswords() {
 
 	const handleUpdate = (website, username, password) => {
 		Axios.put(
-			APP_URL + `/saved/${location.state.user.id}/${selectedPassID}`,
+			APP_URL + `/saved/${sessionStorage.getItem('_uid')}/${selectedPassID}`,
 			{
 				website: website,
 				username: username,
@@ -86,7 +70,7 @@ export function SavedPasswords() {
 			},
 			{
 				headers: {
-					Authorization: 'Bearer ' + sessionStorage.getItem('aT'),
+					Authorization: 'Bearer ' + sessionStorage.getItem('_at'),
 				},
 			}
 		).then(() => {
@@ -95,18 +79,18 @@ export function SavedPasswords() {
 	};
 
 	const handleDelete = () => {
-		Axios.delete(APP_URL + `/saved/${location.state.user.id}/${selectedPassID}`, {
+		Axios.delete(APP_URL + `/saved/${sessionStorage.getItem('_uid')}/${selectedPassID}`, {
 			headers: {
-				Authorization: 'Bearer ' + sessionStorage.getItem('aT'),
+				Authorization: 'Bearer ' + sessionStorage.getItem('_at'),
 			},
 		}).then(() => {
 			fetchCollection();
 		});
 	};
 
-	const handleDrawer = () => {
-		setOpen(!open);
-	};
+	// const handleDrawer = () => {
+	// 	setOpen(!open);
+	// };
 
 	const isEmpty =
 		collection.length > 0 ? (
@@ -131,28 +115,7 @@ export function SavedPasswords() {
 	}, []);
 
 	return (
-		<Box>
-			<Box component="nav" sx={{ flexGrow: 1 }}>
-				<AppBar position="static">
-					<Toolbar>
-						<IconButton onClick={handleDrawer} size="large">
-							<Menu fontSize="large" sx={{ color: 'white' }} />
-						</IconButton>
-						<SideMenu open={open} onClose={handleDrawer} isHome={false} />
-						<Typography
-							variant="h5"
-							sx={{
-								mx: 2,
-								flexGrow: 1,
-								fontSize: '25px',
-								textAlign: { xs: 'center', sm: 'start' },
-							}}
-						>
-							Saved Passwords
-						</Typography>
-					</Toolbar>
-				</AppBar>
-			</Box>
+		<Layout>
 			<Box component="main" sx={{ mb: 6 }}>
 				<Box
 					sx={{
@@ -230,6 +193,6 @@ export function SavedPasswords() {
 					</Dialog>
 				</Box>
 			</Box>
-		</Box>
+		</Layout>
 	);
 }

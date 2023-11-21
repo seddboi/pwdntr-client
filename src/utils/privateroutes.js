@@ -1,8 +1,8 @@
-import { Outlet, Navigate, useLocation } from 'react-router-dom';
+import { Outlet, Navigate } from 'react-router-dom';
 
 export const PrivateRoutes = () => {
-	const loginStatus = useLocation().state?.status || false;
-	const aT = sessionStorage.getItem('aT');
+	const loginStatus = sessionStorage.getItem('_a') || false;
+	const aT = sessionStorage.getItem('_at') || false;
 
-	return loginStatus && aT !== null ? <Outlet /> : <Navigate to="/login" />;
+	return loginStatus && aT ? <Outlet /> : <Navigate to="/login" />;
 };

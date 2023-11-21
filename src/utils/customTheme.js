@@ -13,4 +13,9 @@ export const darkTheme = createTheme({
 			contrastText: '#262626',
 		},
 	},
+	typography: {
+		button: {
+			textTransform: 'none',
+		},
+	},
 });
