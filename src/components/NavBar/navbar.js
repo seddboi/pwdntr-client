@@ -1,8 +1,9 @@
 import React from 'react';
 import Axios from 'axios';
-import { Box, AppBar, Toolbar, Typography, Button } from '@mui/material';
+import { Box, AppBar, Toolbar, Typography, ButtonBase } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { APP_URL } from '../../App';
+import './navbar.css';
 
 const navBtns = {
 	false: [
@@ -27,7 +28,7 @@ export function NavBar() {
 		await Axios.post(APP_URL + '/logout', {
 			userID: sessionStorage.getItem('_uid'),
 			token: sessionStorage.getItem('_at'),
-		}).then((res) => {
+		}).then(() => {
 			sessionStorage.removeItem('_at');
 			sessionStorage.removeItem('_uid');
 			sessionStorage.removeItem('_a');
@@ -36,8 +37,8 @@ export function NavBar() {
 	};
 
 	return (
-		<Box component="nav" sx={{ flexGrow: 1, margin: 0, width: '100%', bgcolor: 'background' }}>
-			<AppBar position="static">
+		<Box className="navbar" component="nav" sx={{ flexGrow: 1, margin: 0, width: '100%', bgcolor: 'container.main' }}>
+			<AppBar position="static" sx={{ bgcolor: 'transparent' }}>
 				<Toolbar>
 					<Typography
 						variant="h4"
@@ -45,15 +46,22 @@ export function NavBar() {
 							display: { xs: 'none', sm: 'block' },
 							flexGrow: 1,
 							textAlign: 'start',
+							color: 'container.contrastText',
 						}}
 					>
 						{header}
 					</Typography>
 					{pageBtns.map((obj, i) => (
-						<Button
+						<ButtonBase
 							key={i}
-							color="button"
-							onClick={() => {
+							className="navbtn"
+							variant="text"
+							size="sm"
+							disableRipple
+							// disabled={obj.name === page ? true : false}
+							onClick={(e) => {
+								e.preventDefault();
+
 								if (obj.name === 'Logout') {
 									console.log('logout triggered');
 									logout();
@@ -62,10 +70,18 @@ export function NavBar() {
 									navigate(obj.route);
 								}
 							}}
-							sx={{ fontSize: '20px' }}
+							sx={{
+								fontSize: '20px',
+								color: 'container.contrastText',
+								p: '5px',
+								mx: 1,
+								'&:hover': {
+									color: 'button.light',
+								},
+							}}
 						>
 							{obj.name}
-						</Button>
+						</ButtonBase>
 					))}
 				</Toolbar>
 			</AppBar>

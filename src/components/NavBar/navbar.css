@@ -1,0 +1,6 @@
+.navbtn {
+	display: inline-block;
+	position: relative;
+	transition: color;
+	transition-duration: 200ms;
+}
