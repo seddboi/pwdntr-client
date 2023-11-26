@@ -7,7 +7,6 @@ import './navbar.css';
 
 const navBtns = {
 	false: [
-		{ name: 'Generator', route: '/' },
 		{ name: 'Login', route: '/login' },
 		{ name: 'Signup', route: '/signup' },
 	],
@@ -22,7 +21,29 @@ export function NavBar() {
 	const navigate = useNavigate();
 
 	const pageBtns = sessionStorage.getItem('_a') ? navBtns[true] : navBtns[false];
-	const header = sessionStorage.getItem('_a') ? `Welcome, ` + sessionStorage.getItem('_un') : 'Passwordinator';
+	const header = sessionStorage.getItem('_a') ? (
+		<Typography variant="h4" sx={{ color: 'button.contrastText', textAlign: 'left' }}>
+			{`Welcome, ` + sessionStorage.getItem('_un')}
+		</Typography>
+	) : (
+		<ButtonBase
+			className="title-btn"
+			onClick={() => {
+				navigate('/');
+			}}
+			sx={{
+				fontSize: { sm: '30px', md: '40px' },
+				color: 'button.contrastText',
+				px: '5px',
+				mx: 1,
+				'&:hover': {
+					color: 'button.light',
+				},
+			}}
+		>
+			PWDNTR
+		</ButtonBase>
+	);
 
 	const logout = async () => {
 		await Axios.post(APP_URL + '/logout', {
@@ -37,20 +58,17 @@ export function NavBar() {
 	};
 
 	return (
-		<Box className="navbar" component="nav" sx={{ flexGrow: 1, margin: 0, width: '100%', bgcolor: 'container.main' }}>
-			<AppBar position="static" sx={{ bgcolor: 'transparent' }}>
+		<Box className="navbar" component="nav" sx={{ flexGrow: 1, margin: 0, width: '100%' }}>
+			<AppBar position="static" sx={{ bgcolor: 'container.main' }}>
 				<Toolbar>
-					<Typography
-						variant="h4"
+					<Box
 						sx={{
-							display: { xs: 'none', sm: 'block' },
+							display: { xs: 'none', sm: 'flex' },
 							flexGrow: 1,
-							textAlign: 'start',
-							color: 'container.contrastText',
 						}}
 					>
 						{header}
-					</Typography>
+					</Box>
 					{pageBtns.map((obj, i) => (
 						<ButtonBase
 							key={i}

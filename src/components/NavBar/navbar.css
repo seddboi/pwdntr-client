@@ -1,6 +1,11 @@
+.title-btn {
+	display: flex;
+	justify-content: flex-start;
+	transition: color;
+	transition-duration: 200ms;
+}
+
 .navbtn {
-	display: inline-block;
-	position: relative;
 	transition: color;
 	transition-duration: 200ms;
 }
