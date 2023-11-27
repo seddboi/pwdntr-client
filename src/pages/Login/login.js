@@ -49,10 +49,10 @@ export function Login() {
 		<Layout>
 			<Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
 				<Box component="form" sx={{ display: 'flex', flexDirection: 'column', width: '90%', maxWidth: '500px', m: 4 }}>
-					<Typography variant="h2" color="#ffffff" sx={{ mb: 5 }}>
+					<Typography variant="h2" color="container.contrastText" sx={{ mb: 5 }}>
 						Welcome Back!
 					</Typography>
-					<InputLabel htmlFor="login-username" sx={{ color: '#eeeeee', fontSize: '20px', textAlign: 'left' }}>
+					<InputLabel htmlFor="login-username" sx={{ color: 'container.contrastText', fontSize: '20px', textAlign: 'left' }}>
 						Username
 					</InputLabel>
 					<InputBase
@@ -74,7 +74,7 @@ export function Login() {
 						}}
 					/>
 
-					<InputLabel htmlFor="login-password" sx={{ color: '#eeeeee', fontSize: '20px', textAlign: 'left' }}>
+					<InputLabel htmlFor="login-password" sx={{ color: 'container.contrastText', fontSize: '20px', textAlign: 'left' }}>
 						Password
 					</InputLabel>
 					<InputBase
