@@ -54,16 +54,16 @@ export function Signup() {
 		<Layout>
 			<Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
 				<Box component="form" sx={{ display: 'flex', flexDirection: 'column', width: '90%', maxWidth: '500px', margin: 4 }}>
-					<Typography variant="h2" color="#ffffff" sx={{ mb: 1 }}>
+					<Typography variant="h2" color="container.contrastText" sx={{ mb: 5 }}>
 						Signup Below!
 					</Typography>
 
-					<InputLabel htmlFor="signup-username" sx={{ color: '#eeeeee', fontSize: '20px', textAlign: 'left' }}>
+					<InputLabel htmlFor="signup-username" sx={{ color: 'container.contrastText', fontSize: '20px', textAlign: 'left' }}>
 						Username
 					</InputLabel>
 					<InputBase
 						id="signup-username"
-						placeholder="Username"
+						placeholder="johndoe123"
 						value={regUsername}
 						onChange={(e) => {
 							setRegUsername(e.target.value.trim());
@@ -77,12 +77,12 @@ export function Signup() {
 						}}
 					/>
 
-					<InputLabel htmlFor="signup-email" sx={{ color: '#eeeeee', fontSize: '20px', textAlign: 'left' }}>
+					<InputLabel htmlFor="signup-email" sx={{ color: 'container.contrastText', fontSize: '20px', textAlign: 'left' }}>
 						Email
 					</InputLabel>
 					<InputBase
 						id="signup-email"
-						placeholder="Email"
+						placeholder="doej@mail.com"
 						value={regEmail}
 						// error={signupError}
 						onChange={(e) => {
@@ -97,12 +97,12 @@ export function Signup() {
 						}}
 					/>
 
-					<InputLabel htmlFor="signup-password" sx={{ color: '#eeeeee', fontSize: '20px', textAlign: 'left' }}>
+					<InputLabel htmlFor="signup-password" sx={{ color: 'container.contrastText', fontSize: '20px', textAlign: 'left' }}>
 						Password
 					</InputLabel>
 					<InputBase
 						id="signup-password"
-						placeholder="Password"
+						placeholder="randompass123"
 						value={regPassword}
 						type={showPassword ? 'text' : 'password'}
 						onChange={(e) => {
