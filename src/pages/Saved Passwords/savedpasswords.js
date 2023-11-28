@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Box, Button, Dialog, DialogTitle, DialogContent, DialogActions, InputLabel, InputBase } from '@mui/material';
-import { Check } from '@mui/icons-material';
+import { Box, Button, Dialog, DialogTitle, DialogContent, DialogActions, InputLabel, InputBase, Typography } from '@mui/material';
+import { SaveAlt, Close } from '@mui/icons-material';
 import { APP_URL } from '../../App';
 import { EmptyComp } from '../../components/EmptyComp/emptyComp';
 import { PasswordEntriesDiv } from '../../components/PasswordEntries/passwordEntries';
@@ -133,9 +133,16 @@ export function SavedPasswords() {
 						Custom Entry
 					</Button>
 					<Dialog open={isDialogOpen}>
-						<DialogTitle>Fill the form below and click the check to submit.</DialogTitle>
+						<DialogTitle>
+							<Typography variant="h4" sx={{ fontSize: '20px' }}>
+								Fill the form below and click the check to submit.
+							</Typography>
+						</DialogTitle>
 						<DialogContent>
-							<InputLabel htmlFor="input-custom-website" sx={{ color: '#eeeeee', fontSize: '20px' }}>
+							<InputLabel
+								htmlFor="input-custom-website"
+								sx={{ color: 'container.contrastText', fontSize: { xs: '20px', sm: '15px' } }}
+							>
 								What website will this be for?
 							</InputLabel>
 							<InputBase
@@ -143,10 +150,20 @@ export function SavedPasswords() {
 								fullWidth
 								onChange={(e) => setCustomSite(e.target.value.trim())}
 								placeholder="Youtube/Facebook/etc."
-								sx={{ mb: 3, px: 1, py: '5px', border: '1px solid rgba(0, 0, 0, 0.4)', backgroundColor: '#F8F8FF' }}
+								sx={{
+									mb: 3,
+									px: 1,
+									py: '5px',
+									border: '1px solid rgba(0, 0, 0, 0.4)',
+									borderRadius: '8px',
+									backgroundColor: '#F8F8FF',
+								}}
 							/>
 
-							<InputLabel htmlFor="input-custom-username" sx={{ color: '#eeeeee', fontSize: '20px' }}>
+							<InputLabel
+								htmlFor="input-custom-username"
+								sx={{ color: 'container.contrastText', fontSize: { xs: '20px', sm: '15px' } }}
+							>
 								What username will you be using?
 							</InputLabel>
 							<InputBase
@@ -154,10 +171,20 @@ export function SavedPasswords() {
 								fullWidth
 								onChange={(e) => setCustomUser(e.target.value.trim())}
 								placeholder="johndoe123"
-								sx={{ mb: 3, px: 1, py: '5px', border: '1px solid rgba(0, 0, 0, 0.4)', backgroundColor: '#F8F8FF' }}
+								sx={{
+									mb: 3,
+									px: 1,
+									py: '5px',
+									border: '1px solid rgba(0, 0, 0, 0.4)',
+									borderRadius: '8px',
+									backgroundColor: '#F8F8FF',
+								}}
 							/>
 
-							<InputLabel htmlFor="input-custom-password" sx={{ color: '#eeeeee', fontSize: '20px' }}>
+							<InputLabel
+								htmlFor="input-custom-password"
+								sx={{ color: 'container.contrastText', fontSize: { xs: '20px', sm: '15px' } }}
+							>
 								What password will you be using?
 							</InputLabel>
 							<InputBase
@@ -165,7 +192,14 @@ export function SavedPasswords() {
 								fullWidth
 								onChange={(e) => setCustomPass(e.target.value.trim())}
 								placeholder="randompass123"
-								sx={{ mb: 3, px: 1, py: '5px', border: '1px solid rgba(0, 0, 0, 0.4)', backgroundColor: '#F8F8FF' }}
+								sx={{
+									mb: 3,
+									px: 1,
+									py: '5px',
+									border: '1px solid rgba(0, 0, 0, 0.4)',
+									borderRadius: '8px',
+									backgroundColor: '#F8F8FF',
+								}}
 							/>
 						</DialogContent>
 						<DialogActions>
@@ -178,7 +212,7 @@ export function SavedPasswords() {
 									handleDialogClose();
 								}}
 							>
-								<Check fontSize="medium" />
+								<SaveAlt fontSize="medium" />
 							</Button>
 							<Button
 								variant="contained"
@@ -187,7 +221,7 @@ export function SavedPasswords() {
 									handleDialogClose();
 								}}
 							>
-								Cancel
+								<Close />
 							</Button>
 						</DialogActions>
 					</Dialog>
