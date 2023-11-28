@@ -69,7 +69,11 @@ export function Form() {
 
 	const errorPopup = (
 		<Dialog open={isOpen} onClose={handleClickClose}>
-			<DialogTitle>Please enter a value between 8-20 and select at least one option.</DialogTitle>
+			<DialogTitle sx={{ m: 5, p: 3, bgcolor: 'item', borderRadius: '8px', boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.14)' }}>
+				<Typography variant="h4" sx={{ fontSize: { xs: '20px', sm: '15px' }, textAlign: 'center' }}>
+					Please enter a character value between 8-20 and select at least one option.
+				</Typography>
+			</DialogTitle>
 		</Dialog>
 	);
 
@@ -146,7 +150,7 @@ export function Form() {
 						<Typography
 							className="prevent-select"
 							variant="body1"
-							sx={{ color: isUppercase ? 'button.main' : 'button.contrastText', fontSize: '20px' }}
+							sx={{ color: isUppercase ? 'button.main' : 'button.contrastText', fontSize: '15px' }}
 						>
 							Uppercase Letters
 						</Typography>
@@ -177,7 +181,7 @@ export function Form() {
 						<Typography
 							className="prevent-select"
 							variant="body1"
-							sx={{ color: isLowercase ? 'button.main' : 'button.contrastText', fontSize: '20px' }}
+							sx={{ color: isLowercase ? 'button.main' : 'button.contrastText', fontSize: '15px' }}
 						>
 							Lowercase Letters
 						</Typography>
@@ -208,7 +212,7 @@ export function Form() {
 						<Typography
 							className="prevent-select"
 							variant="body1"
-							sx={{ color: isNumbers ? 'button.main' : 'button.contrastText', fontSize: '20px' }}
+							sx={{ color: isNumbers ? 'button.main' : 'button.contrastText', fontSize: '15px' }}
 						>
 							Numbers
 						</Typography>
@@ -239,7 +243,7 @@ export function Form() {
 						<Typography
 							className="prevent-select"
 							variant="body1"
-							sx={{ color: isSpecial ? 'button.main' : 'button.contrastText', fontSize: '20px' }}
+							sx={{ color: isSpecial ? 'button.main' : 'button.contrastText', fontSize: '15px' }}
 						>
 							Special Characters
 						</Typography>

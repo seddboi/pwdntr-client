@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Dialog, DialogActions, DialogContent, Button, InputBase, InputLabel } from '@mui/material';
-import { ContentCopy, Check, Replay, ExitToApp } from '@mui/icons-material';
-import { useLocation } from 'react-router-dom';
+import { ContentCopy, Check, Replay, Close, SaveAlt } from '@mui/icons-material';
 import '../Popup/popup.css';
 
 export function Popup({
@@ -22,7 +21,7 @@ export function Popup({
 	const [isCopied, setIsCopied] = useState(false);
 	const [isClicked, setIsClicked] = useState(false);
 
-	const loggedIn = useLocation().state?.status;
+	const loggedIn = sessionStorage.getItem('_a');
 
 	const copyPassword = () => {
 		let target = document.getElementById('password-text');
@@ -48,7 +47,9 @@ export function Popup({
 					px: 2,
 					mb: 2,
 					border: '1px solid rgba(0, 0, 0, 0.4)',
+					borderRadius: '8px',
 					backgroundColor: '#ffffff',
+					boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.14)',
 				}}
 			/>
 		);
@@ -65,7 +66,7 @@ export function Popup({
 		<Dialog open={isOpen} fullWidth>
 			<DialogContent>
 				{passwordContainer}
-				<DialogActions>
+				<DialogActions sx={{ display: 'flex', justifyContent: { xs: 'center', sm: 'flex-end' } }}>
 					<Button
 						color="button"
 						variant="contained"
@@ -84,7 +85,7 @@ export function Popup({
 								setIsClicked(true);
 							}}
 						>
-							Save
+							<SaveAlt />
 						</Button>
 					) : (
 						<div></div>
@@ -98,7 +99,7 @@ export function Popup({
 							handleClickClose();
 						}}
 					>
-						<ExitToApp />
+						<Close />
 					</Button>
 				</DialogActions>
 			</DialogContent>
@@ -106,7 +107,7 @@ export function Popup({
 	) : (
 		<Dialog open={isClicked} fullWidth>
 			<DialogContent>
-				<InputLabel htmlFor="associated-username" sx={{ fontSize: '20px', color: '#eeeeee' }}>
+				<InputLabel htmlFor="associated-username" sx={{ fontSize: { xs: '20px', sm: '15px' }, color: 'container.contrastText' }}>
 					Associated username?
 				</InputLabel>
 				<InputBase
@@ -122,11 +123,13 @@ export function Popup({
 						px: 2,
 						mb: 2,
 						border: '1px solid rgba(0, 0, 0, 0.4)',
+						borderRadius: '8px',
 						backgroundColor: '#ffffff',
+						boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.14)',
 					}}
 				/>
 
-				<InputLabel htmlFor="associated-website" sx={{ fontSize: '20px', color: '#eeeeee' }}>
+				<InputLabel htmlFor="associated-website" sx={{ fontSize: { xs: '20px', sm: '15px' }, color: 'container.contrastText' }}>
 					Associated website?
 				</InputLabel>
 				<InputBase
@@ -142,7 +145,9 @@ export function Popup({
 						px: 2,
 						mb: 2,
 						border: '1px solid rgba(0, 0, 0, 0.4)',
+						borderRadius: '8px',
 						backgroundColor: '#ffffff',
+						boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.14)',
 					}}
 				/>
 				{/* <Typography variant="p"></Typography> */}
@@ -158,7 +163,7 @@ export function Popup({
 							handleClickClose();
 						}}
 					>
-						Submit
+						<SaveAlt />
 					</Button>
 					<Button
 						color="button"
@@ -168,7 +173,7 @@ export function Popup({
 							setIsClicked(false);
 						}}
 					>
-						Close
+						<Close />
 					</Button>
 				</DialogActions>
 			</DialogContent>
