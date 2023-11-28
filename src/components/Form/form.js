@@ -73,11 +73,15 @@ export function Form() {
 		</Dialog>
 	);
 
+	const randomPass = usePasswordRandomizer(parseInt(characterEntry), isUppercase, isLowercase, isNumbers, isSpecial);
+
 	const successPopup = (
 		<Popup
 			handleClickClose={handleClickClose}
 			isOpen={isOpen}
+			randomPass={randomPass}
 			password={password}
+			setPassword={setPassword}
 			addPassword={addPassword}
 			entryUsername={entryUsername}
 			setEntryUsername={setEntryUsername}
@@ -101,8 +105,6 @@ export function Form() {
 			return successPopup;
 		}
 	};
-
-	const randomPass = usePasswordRandomizer(parseInt(characterEntry), isUppercase, isLowercase, isNumbers, isSpecial);
 
 	return (
 		<Container>

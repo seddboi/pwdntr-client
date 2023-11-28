@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { Container, Dialog, DialogActions, DialogContent, DialogTitle, Button, InputBase, InputLabel } from '@mui/material';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import CheckIcon from '@mui/icons-material/Check';
+import { Container, Dialog, DialogActions, DialogContent, Button, InputBase, InputLabel } from '@mui/material';
+import { ContentCopy, Check, Replay, ExitToApp } from '@mui/icons-material';
 import { useLocation } from 'react-router-dom';
 import '../Popup/popup.css';
 
 export function Popup({
 	handleClickClose,
 	isOpen,
+	randomPass,
 	password,
+	setPassword,
 	isSubmitClicked,
 	setIsSubmitClicked,
 	addPassword,
@@ -52,23 +53,28 @@ export function Popup({
 			/>
 		);
 
-	const iconSwitcher = isCopied ? <CheckIcon /> : <ContentCopyIcon />;
+	const iconSwitcher = isCopied ? <Check /> : <ContentCopy />;
 
-	const copyButtonHider =
-		password === '' ? (
-			<div></div>
-		) : (
-			<Button color="button" variant="contained" onClick={copyPassword}>
-				{iconSwitcher}
-			</Button>
-		);
+	const copyButtonHider = (
+		<Button color="button" variant="contained" onClick={copyPassword}>
+			{iconSwitcher}
+		</Button>
+	);
 
 	const savePasswordPopup = !isClicked ? (
 		<Dialog open={isOpen} fullWidth>
-			<DialogTitle sx={{ color: '#000000' }}>Your new password:</DialogTitle>
 			<DialogContent>
 				{passwordContainer}
 				<DialogActions>
+					<Button
+						color="button"
+						variant="contained"
+						onClick={() => {
+							setPassword(randomPass);
+						}}
+					>
+						<Replay />
+					</Button>
 					{copyButtonHider}
 					{loggedIn !== undefined ? (
 						<Button
@@ -92,7 +98,7 @@ export function Popup({
 							handleClickClose();
 						}}
 					>
-						Close
+						<ExitToApp />
 					</Button>
 				</DialogActions>
 			</DialogContent>
