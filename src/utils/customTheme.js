@@ -4,7 +4,7 @@ export const darkTheme = createTheme({
 	palette: {
 		background: '#898980',
 		container: { main: '#A9B2AC', contrastText: '#262626' },
-		item: '#BCD0C7',
+		item: { main: '#BCD0C7', dark: '#A9BBB3' },
 		itemInsides: { main: '#C5DAC1', contrastText: '#262626' },
 		button: {
 			main: '#DEF2C8',

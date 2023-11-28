@@ -159,8 +159,11 @@ export function Form() {
 						mb: 3,
 						mx: 0,
 						borderRadius: '8px',
-						bgcolor: 'item',
+						bgcolor: isUppercase ? 'item.dark' : 'item.main',
 						boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.14)',
+						'&:hover': {
+							bgcolor: '#a9bbb3',
+						},
 					}}
 				/>
 
@@ -190,8 +193,11 @@ export function Form() {
 						mb: 3,
 						mx: 0,
 						borderRadius: '8px',
-						bgcolor: 'item',
+						bgcolor: isLowercase ? 'item.dark' : 'item.main',
 						boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.14)',
+						'&:hover': {
+							bgcolor: '#a9bbb3',
+						},
 					}}
 				/>
 
@@ -221,8 +227,11 @@ export function Form() {
 						mb: 3,
 						mx: 0,
 						borderRadius: '8px',
-						bgcolor: 'item',
+						bgcolor: isNumbers ? 'item.dark' : 'item.main',
 						boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.14)',
+						'&:hover': {
+							bgcolor: '#a9bbb3',
+						},
 					}}
 				/>
 
@@ -252,8 +261,11 @@ export function Form() {
 						mb: 3,
 						mx: 0,
 						borderRadius: '8px',
-						bgcolor: 'item',
+						bgcolor: isSpecial ? 'item.dark' : 'item.main',
 						boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.14)',
+						'&:hover': {
+							bgcolor: '#a9bbb3',
+						},
 					}}
 				/>
 			</FormGroup>
