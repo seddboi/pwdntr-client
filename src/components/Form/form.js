@@ -1,16 +1,5 @@
 import React, { useState } from 'react';
-import {
-	Container,
-	Box,
-	FormGroup,
-	FormControlLabel,
-	InputBase,
-	Checkbox,
-	Button,
-	Typography,
-	Dialog,
-	DialogTitle,
-} from '@mui/material';
+import { Container, Box, FormGroup, FormControlLabel, InputBase, Checkbox, Button, Typography } from '@mui/material';
 import { CheckBoxOutlineBlank } from '@mui/icons-material';
 import { Popup } from '../Popup/popup';
 import { usePasswordRandomizer } from '../../hooks/usePasswordRandomizer';
@@ -60,22 +49,11 @@ export function Form() {
 	const handleClickClose = () => {
 		setisOpen(!isOpen);
 		setCharacterEntry('');
-		// textInput.value = '';
 		setIsUppercase(false);
 		setIsLowercase(false);
 		setIsNumbers(false);
 		setIsSpecial(false);
 	};
-
-	const errorPopup = (
-		<Dialog open={isOpen} onClose={handleClickClose}>
-			<DialogTitle sx={{ m: 5, p: 3, bgcolor: 'item', borderRadius: '8px', boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.14)' }}>
-				<Typography variant="h4" sx={{ fontSize: { xs: '20px', sm: '15px' }, textAlign: 'center' }}>
-					Please enter a character value between 8-20 and select at least one option.
-				</Typography>
-			</DialogTitle>
-		</Dialog>
-	);
 
 	const randomPass = usePasswordRandomizer(parseInt(characterEntry), isUppercase, isLowercase, isNumbers, isSpecial);
 
@@ -96,19 +74,6 @@ export function Form() {
 			setIsSubmitClicked={setIsSubmitClicked}
 		/>
 	);
-
-	const popupSwitcher = () => {
-		if (
-			characterEntry < 8 ||
-			characterEntry > 20 ||
-			characterEntry === '' ||
-			(!isUppercase && !isLowercase && !isNumbers && !isSpecial)
-		) {
-			return errorPopup;
-		} else {
-			return successPopup;
-		}
-	};
 
 	return (
 		<Container>
@@ -279,11 +244,25 @@ export function Form() {
 			</FormGroup>
 			<Box className="bottom-section">
 				<Container>
-					<Button className="gobutton" variant="contained" color="button" size="large" onClick={handleClickOpen}>
+					<Button
+						className="gobutton"
+						variant="contained"
+						color="button"
+						size="large"
+						disabled={
+							characterEntry < 8 ||
+							characterEntry > 20 ||
+							characterEntry === '' ||
+							(!isUppercase && !isLowercase && !isNumbers && !isSpecial)
+								? true
+								: false
+						}
+						onClick={handleClickOpen}
+					>
 						Generate
 					</Button>
 				</Container>
-				{popupSwitcher()}
+				{successPopup}
 			</Box>
 		</Container>
 	);
