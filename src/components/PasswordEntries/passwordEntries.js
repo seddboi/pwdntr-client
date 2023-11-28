@@ -37,7 +37,7 @@ export function PasswordEntriesDiv({
 						flexDirection: 'column',
 						width: '100%',
 						maxWidth: { sm: '900px' },
-						backgroundColor: '#3e3e3e',
+						backgroundColor: 'container.main',
 						borderRadius: '5px',
 						py: 1,
 						mx: 2,
