@@ -13,7 +13,7 @@ import {
 	InputLabel,
 	Box,
 } from '@mui/material';
-import { ExpandMore, ExpandLess, Check } from '@mui/icons-material';
+import { ExpandMore, ExpandLess, Close, Check } from '@mui/icons-material';
 import { Dropdown } from '../ListItemDropdown/listitemdropdown';
 import './listitem.css';
 
@@ -58,7 +58,9 @@ export function PasswordItem({ item, index, setSelectedPassID, selectedButton, s
 					Enter your new values. Any changes made will be updated.
 				</DialogTitle>
 				<DialogContent>
-					<InputLabel htmlFor="pass-website">Website</InputLabel>
+					<InputLabel htmlFor="pass-website" sx={{ color: 'container.contrastText' }}>
+						Website
+					</InputLabel>
 					<InputBase
 						id="pass-website"
 						defaultValue={item.website}
@@ -69,10 +71,15 @@ export function PasswordItem({ item, index, setSelectedPassID, selectedButton, s
 							px: 1,
 							py: '5px',
 							border: '1px solid rgba(0, 0, 0, 0.4)',
+							borderRadius: '8px',
 							backgroundColor: '#F8F8FF',
+							boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.14)',
 						}}
 					/>
-					<InputLabel htmlFor="pass-username">Username</InputLabel>
+
+					<InputLabel htmlFor="pass-username" sx={{ color: 'container.contrastText' }}>
+						Username
+					</InputLabel>
 					<InputBase
 						id="pass-username"
 						defaultValue={item.username}
@@ -83,10 +90,15 @@ export function PasswordItem({ item, index, setSelectedPassID, selectedButton, s
 							px: 1,
 							py: '5px',
 							border: '1px solid rgba(0, 0, 0, 0.4)',
+							borderRadius: '8px',
 							backgroundColor: '#F8F8FF',
+							boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.14)',
 						}}
 					/>
-					<InputLabel htmlFor="pass-password">Password</InputLabel>
+
+					<InputLabel htmlFor="pass-password" sx={{ color: 'container.contrastText' }}>
+						Password
+					</InputLabel>
 					<InputBase
 						id="pass-password"
 						defaultValue={item.password}
@@ -97,7 +109,9 @@ export function PasswordItem({ item, index, setSelectedPassID, selectedButton, s
 							px: 1,
 							py: '5px',
 							border: '1px solid rgba(0, 0, 0, 0.4)',
+							borderRadius: '8px',
 							backgroundColor: '#F8F8FF',
+							boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.14)',
 						}}
 					/>
 				</DialogContent>
@@ -105,12 +119,17 @@ export function PasswordItem({ item, index, setSelectedPassID, selectedButton, s
 					<Button
 						variant="contained"
 						color="button"
+						disabled={
+							item.website === editedWebsite && item.username === editedUsername && item.password === editedPassword
+								? true
+								: false
+						}
 						onClick={() => {
 							handleUpdate(editedWebsite, editedUsername, editedPassword);
 							handleDialogClose();
 						}}
 					>
-						<Check fontSize="medium" />
+						<Check />
 					</Button>
 					<Button
 						variant="contained"
@@ -119,13 +138,13 @@ export function PasswordItem({ item, index, setSelectedPassID, selectedButton, s
 							handleDialogClose();
 						}}
 					>
-						Cancel
+						<Close />
 					</Button>
 				</DialogActions>
 			</Dialog>
 		) : (
 			<Dialog open={isDialogOpen} fullWidth>
-				<DialogTitle sx={{ color: '#181818' }}>Are you sure you want to remove this entry?</DialogTitle>
+				<DialogTitle sx={{ color: 'container.contrastText' }}>Are you sure you want to remove this entry?</DialogTitle>
 				<DialogActions>
 					<Button
 						variant="contained"
@@ -135,7 +154,7 @@ export function PasswordItem({ item, index, setSelectedPassID, selectedButton, s
 							handleDialogClose();
 						}}
 					>
-						<Check fontSize="medium" />
+						<Check />
 					</Button>
 					<Button
 						variant="contained"
@@ -144,7 +163,7 @@ export function PasswordItem({ item, index, setSelectedPassID, selectedButton, s
 							handleDialogClose();
 						}}
 					>
-						Cancel
+						<Close />
 					</Button>
 				</DialogActions>
 			</Dialog>
@@ -158,18 +177,23 @@ export function PasswordItem({ item, index, setSelectedPassID, selectedButton, s
 						id="list-button"
 						sx={{
 							display: 'flex',
-							boxShadow: '0 3px 3px #000',
+							boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.24)',
 							height: '50px',
 							mb: 2,
 							borderRadius: '30px',
-							bgcolor: '#F8F8FF',
+							bgcolor: 'item.main',
+							transition: 'background-color',
+							transitionDuration: '250ms',
 							'&:hover': {
-								bgcolor: '#c6c6cc',
+								bgcolor: 'item.dark',
 							},
 						}}
 						onClick={handleCollapseOpen}
 					>
-						<Typography variant="h5" sx={{ textAlign: 'left', flexGrow: 1, color: '#17202A', fontSize: '20px' }}>
+						<Typography
+							variant="h5"
+							sx={{ textAlign: 'left', flexGrow: 1, color: 'container.contrastText', fontSize: { xs: '20px', sm: '15px' } }}
+						>
 							{item.website}
 						</Typography>
 						{open ? <ExpandLess /> : <ExpandMore />}
