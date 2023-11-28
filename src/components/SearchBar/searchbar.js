@@ -16,7 +16,9 @@ export function SearchBar({ setSearchText }) {
 					maxWidth: '600px',
 					color: 'primary',
 					border: '1px solid rgba(0, 0, 0, 0.4)',
+					borderRadius: '8px',
 					backgroundColor: '#ffffff',
+					boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.14)',
 				}}
 			/>
 		</Box>
