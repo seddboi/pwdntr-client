@@ -4,5 +4,11 @@
 }
 
 .checkbox {
-	color: #212F3D;
+	color: #212f3d;
+}
+
+.prevent-select {
+	-webkit-user-select: none; /* Safari */
+	-ms-user-select: none; /* IE 10 and IE 11 */
+	user-select: none; /* Standard syntax */
 }
