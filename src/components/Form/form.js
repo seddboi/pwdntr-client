@@ -161,6 +161,8 @@ export function Form() {
 						borderRadius: '8px',
 						bgcolor: isUppercase ? 'item.dark' : 'item.main',
 						boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.14)',
+						transition: 'background-color',
+						transitionDuration: '250ms',
 						'&:hover': {
 							bgcolor: '#a9bbb3',
 						},
@@ -195,6 +197,8 @@ export function Form() {
 						borderRadius: '8px',
 						bgcolor: isLowercase ? 'item.dark' : 'item.main',
 						boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.14)',
+						transition: 'background-color',
+						transitionDuration: '250ms',
 						'&:hover': {
 							bgcolor: '#a9bbb3',
 						},
@@ -229,6 +233,8 @@ export function Form() {
 						borderRadius: '8px',
 						bgcolor: isNumbers ? 'item.dark' : 'item.main',
 						boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.14)',
+						transition: 'background-color',
+						transitionDuration: '250ms',
 						'&:hover': {
 							bgcolor: '#a9bbb3',
 						},
@@ -263,6 +269,8 @@ export function Form() {
 						borderRadius: '8px',
 						bgcolor: isSpecial ? 'item.dark' : 'item.main',
 						boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.14)',
+						transition: 'background-color',
+						transitionDuration: '250ms',
 						'&:hover': {
 							bgcolor: '#a9bbb3',
 						},
